@@ -37,11 +37,8 @@ async def guild(ctx, guild: discord.Guild = None, sub = None):
     await ctx.message.delete()
     if guild == None:
         guild = ctx.guild
-    if guild.id not in guilds:
-        sub = 'Данный сервер не находится в списке разрешённых. Вы не сможете выполнять большинство команд, но сможете насладиться низким пингом.'
-    else:
-        sub = 'Сервер находится в списке разрешённых. Вы можете выполнять все команды с минимальным пингом.'
-        emb = discord.Embed(title = f'Информация о {guild}', description = f'{sub}', colour = discord.Color.red(), timestamp = ctx.message.created_at)
+    if guild.id in guilds:
+        emb = discord.Embed(title = f'Информация о {guild}', description = 'Сервер находится в списке разрешённых. Вы можете выполнять большинство комманд с минимальным пингом, а ваши сообщения НЕ будут дублироваться на основной сервер бота.', colour = discord.Color.red(), timestamp = ctx.message.created_at)
         emb.add_field(name = 'ID сервера', value = guild.id)
         emb.add_field(name = 'Уровень сервера', value = guild.premium_tier)
         emb.add_field(name = 'Люди, бустящие сервер', value = guild.premium_subscribers)
