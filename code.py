@@ -38,18 +38,17 @@ async def guild(ctx, guild: discord.Guild = None):
     if guild == None:
         guild = None
     if ctx.guild.id not in guilds:
-        subscription = ('Данный сервер не занесён в список разрешённых. Вы не сможете выполнять большую часть команд, однако сможете насладиться минимальным пингом.')
+        await ctx.send(f'Сервер `{ctx.guild}` не имеет активных подписок. Если вы купили приватную версию, напишите разработчику, чтобы ваш сервер был добавлен в список разрешённых.')
     else:
-        subscription = ('Данный сервер находится в списке разрешённых. Все пользователи могут использовать весь функционал бота с минимальным пингом.')
-    emb = discord.Embed(title = f'Информация о {ctx.guild}', description = f'{subscription}', colour = discord.Color.red(), timestamp = ctx.message.created_at)
-    emb.add_field(name = 'ID сервера', value = ctx.guild.id)
-    emb.add_field(name = 'Уровень сервера', value = ctx.guild.premium_tier)
-    emb.add_field(name = 'Люди, бустящие сервер', value = ctx.guild.premium_subscribers)
-    emb.add_field(name = 'Владелец сервера', value = ctx.guild.owner.mention, inline = False)
-    emb.add_field(name = 'Количество человек на сервере', value = ctx.guild.member_count)
-    emb.add_field(name = 'Дата создания сервера', value = ctx.guild.created_at.strftime("%a, %#d %B %Y, %I:%M %p UTC"), inline = False)
-    emb.set_thumbnail(url = ctx.guild.icon_url)
-    await ctx.send(embed = emb)
+        emb = discord.Embed(title = f'Информация о {ctx.guild}', description = f'{subscription}', colour = discord.Color.red(), timestamp = ctx.message.created_at)
+        emb.add_field(name = 'ID сервера', value = ctx.guild.id)
+        emb.add_field(name = 'Уровень сервера', value = ctx.guild.premium_tier)
+        emb.add_field(name = 'Люди, бустящие сервер', value = ctx.guild.premium_subscribers)
+        emb.add_field(name = 'Владелец сервера', value = ctx.guild.owner.mention, inline = False)
+        emb.add_field(name = 'Количество человек на сервере', value = ctx.guild.member_count)
+        emb.add_field(name = 'Дата создания сервера', value = ctx.guild.created_at.strftime("%a, %#d %B %Y, %I:%M %p UTC"), inline = False)
+        emb.set_thumbnail(url = ctx.guild.icon_url)
+        await ctx.send(embed = emb)
     
 @client.command()
 @commands.cooldown(1, 5, commands.BucketType.default)
