@@ -39,9 +39,9 @@ async def guild(ctx, guild: discord.Guild = None):
         guild = ctx.guild
     await ctx.message.delete()
     if ctx.guild.id not in guilds:
-        sub = 'Данный сервер не занесён в список разрешённых. Вы не сможете выполнять большую часть команд, однако сможете насладиться минимальным пингом.'
+        sub = ('Данный сервер не занесён в список разрешённых. Вы не сможете выполнять большую часть команд, однако сможете насладиться минимальным пингом.')
     else:
-        sub = 'Данный сервер находится в списке разрешённых. Все пользователи могут использовать весь функционал бота с минимальным пингом.'
+        sub = ('Данный сервер находится в списке разрешённых. Все пользователи могут использовать весь функционал бота с минимальным пингом.')
     emb = discord.Embed(title = f'Информация о {guild}', description = f'{sub}', colour = discord.Color.red(), timestamp = ctx.message.created_at)
     emb.add_field(name = 'ID сервера', value = guild.id)
     emb.add_field(name = 'Уровень сервера', value = guild.premium_tier)
@@ -50,7 +50,6 @@ async def guild(ctx, guild: discord.Guild = None):
     emb.add_field(name = 'Количество человек на сервере', value = guild.member_count)
     emb.add_field(name = 'Дата создания сервера', value = guild.created_at.strftime("%a, %#d %B %Y, %I:%M %p UTC"), inline = False)
     emb.set_thumbnail(url = guild.icon_url)
-    emb.set_footer(text = 'Cephalon Cy by сасиска#2472')
     await ctx.send(embed = emb)
     
 @client.command()
@@ -80,7 +79,6 @@ async def role(ctx, *, role: discord.Role):
         emb.add_field(name = 'Позиция в списке', value = role.position)
         emb.add_field(name = 'Создана', value = role.created_at.strftime("%A, %#d %B %Y, %I:%M %p UTC"), inline = False)
         emb.add_field(name = 'Показывает участников отдельно?', value = role.hoist)
-        emb.set_footer(text = 'Cephalon Cy by сасиска#2472')
         await ctx.send(embed = emb)
     
 @client.command(aliases = ['Avatar', 'AVATAR'])
@@ -95,7 +93,6 @@ async def avatar(ctx, member: discord.Member = None):
         emb = discord.Embed(description = f'[Прямая ссылка]({member.avatar_url})', colour = member.color)
         emb.set_author(name = member)
         emb.set_image(url = member.avatar_url)
-        emb.set_footer(text = 'Cephalon Cy by сасиска#2472')
         await ctx.send(embed = emb)
     
 @client.command(aliases = ['me', 'Me', 'ME', 'About', 'ABOUT'])
@@ -125,7 +122,6 @@ async def about(ctx, member: discord.Member = None):
         emb.add_field(name = 'Высшая Роль', value = member.top_role.mention, inline = False)
         emb.add_field(name = 'Бот?', value = bot)
         emb.set_thumbnail(url = member.avatar_url)
-        emb.set_footer(text = 'Cephalon Cy by сасиска#2472')
         await ctx.send(embed = emb)
         
 @client.command()
@@ -159,7 +155,7 @@ async def rp(ctx):
 async def rap(ctx):
     await ctx.message.delete()
     emb = discord.Embed(colour = ctx.author.color)
-    emb.set_author(name = ctx.autho, icon_url = ctx.author.icon_url)
+    emb.set_author(name = ctx.author, icon_url = ctx.author.icon_url)
     emb.set_image(url = 'https://thumbs.gfycat.com/MessyCarefreeHousefly-size_restricted.gif')
     await ctx.send(embed = emb)
         
