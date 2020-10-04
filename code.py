@@ -7,9 +7,9 @@ import discord
 from discord.ext import commands
 from discord.utils import get
 
-client = commands.Bot(command_prefix = when_mentioned_or('cy\'), owner_id = 338714886001524737)
+client = commands.Bot(command_prefix = commands.when_mentioned_or('cy/'), owner_id = 338714886001524737)
 client.remove_command('help')
-
+                                                     
 @client.command(aliases = ['Help', 'HELP'])
 @commands.cooldown(1, 3, commands.BucketType.default)
 @commands.has_permissions(kick_members = True)
