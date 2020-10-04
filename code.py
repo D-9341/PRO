@@ -18,7 +18,7 @@ guilds = [693929822543675455, 735874149578440855]
 async def content(ctx, arg):
     await ctx.message.delete()
     if ctx.guild.id not in guilds:
-        await ctx.send(f'Сервер `{ctx.guild}` не имеет активных подписок. Если вы купили не публичную версию, напишите разработчику, чтобы ваш сервер был добавлен в список разрешённых.')
+        await ctx.send(f'Сервер `{ctx.guild}` не имеет активных подписок. Если вы купили приватную версию, напишите разработчику, чтобы ваш сервер был добавлен в список разрешённых.')
     else:
         message = await ctx.fetch_message(id = arg)
         if message.author == client.user:
@@ -31,7 +31,7 @@ async def content(ctx, arg):
 async def emb_content(ctx, arg):
     await ctx.message.delete()
     if ctx.guild.id not in guilds:
-        await ctx.send(f'Сервер `{ctx.guild}` не имеет активных подписок. Если вы купили не публичную версию, напишите разработчику, чтобы ваш сервер был добавлен в список разрешённых.')
+        await ctx.send(f'Сервер `{ctx.guild}` не имеет активных подписок. Если вы купили приветную версию, напишите разработчику, чтобы ваш сервер был добавлен в список разрешённых.')
     else:
         message = await ctx.fetch_message(id = arg)
         for emb in message.embeds:
@@ -46,7 +46,7 @@ async def emb_content(ctx, arg):
 async def say_everyone(ctx, arg = None, text = None, t = None, d = None, fu = None, img = None, f = None, c = None, a : discord.Member = None):
     await ctx.message.delete()
     if ctx.guild.id not in guilds:
-        await ctx.send(f'Сервер `{ctx.guild}` не имеет активных подписок. Если вы купили не публичную версию, напишите разработчику, чтобы ваш сервер был добавлен в список разрешённых.')
+        await ctx.send(f'Сервер `{ctx.guild}` не имеет активных подписок. Если вы купили приватную версию, напишите разработчику, чтобы ваш сервер был добавлен в список разрешённых.')
     else:
         if c == None:
             c = ctx.author.color
@@ -75,7 +75,7 @@ async def say_everyone(ctx, arg = None, text = None, t = None, d = None, fu = No
 async def say(ctx, arg = None, text = None, t = None, d = None, fu = None, img = None, f = None, c = None, a : discord.Member = None, *, role: discord.Role = None):
     await ctx.message.delete()
     if ctx.guild.id not in guilds:
-        await ctx.send(f'Сервер `{ctx.guild}` не имеет активных подписок. Если вы купили не публичную версию, напишите разработчику, чтобы ваш сервер был добавлен в список разрешённых.')
+        await ctx.send(f'Сервер `{ctx.guild}` не имеет активных подписок. Если вы купили приватную версию, напишите разработчику, чтобы ваш сервер был добавлен в список разрешённых.')
     else:
         if c == None:
             c = ctx.author.color
@@ -108,7 +108,7 @@ async def say(ctx, arg = None, text = None, t = None, d = None, fu = None, img =
 async def emb_edit(ctx, arg, t = None, d = None, fu = None, img = None, f = None, c = None, a : discord.Member = None):
     await ctx.message.delete()
     if ctx.guild.id not in guilds:
-        await ctx.send(f'Сервер `{ctx.guild}` не имеет активных подписок. Если вы купили не публичную версию, напишите разработчику, чтобы ваш сервер был добавлен в список разрешённых.')
+        await ctx.send(f'Сервер `{ctx.guild}` не имеет активных подписок. Если вы купили приватную версию, напишите разработчику, чтобы ваш сервер был добавлен в список разрешённых.')
     else:
         message = await ctx.fetch_message(id = arg)
         if c == None:
@@ -136,7 +136,7 @@ async def emb_edit(ctx, arg, t = None, d = None, fu = None, img = None, f = None
 async def edit(ctx, arg, *, text):
     await ctx.message.delete()
     if ctx.guild.id not in guilds:
-        await ctx.send(f'Сервер `{ctx.guild}` не имеет активных подписок. Если вы купили не публичную версию, напишите разработчику, чтобы ваш сервер был добавлен в список разрешённых.')
+        await ctx.send(f'Сервер `{ctx.guild}` не имеет активных подписок. Если вы купили приватную версию, напишите разработчику, чтобы ваш сервер был добавлен в список разрешённых.')
     else:
         message = await ctx.fetch_message(id = arg)
         await message.edit(content = text)
@@ -148,7 +148,7 @@ async def edit(ctx, arg, *, text):
 async def join(ctx):
     await ctx.message.delete()
     if ctx.guild.id not in guilds:
-        await ctx.send(f'Сервер `{ctx.guild}` не имеет активных подписок. Если вы купили не публичную версию, напишите разработчику, чтобы ваш сервер был добавлен в список разрешённых.')
+        await ctx.send(f'Сервер `{ctx.guild}` не имеет активных подписок. Если вы купили приватную версию, напишите разработчику, чтобы ваш сервер был добавлен в список разрешённых.')
     else:
         if ctx.author.voice and ctx.author.voice.channel:
             channel = ctx.author.voice.channel
@@ -163,7 +163,7 @@ async def join(ctx):
 async def ping(ctx):
     await ctx.message.delete()
     if ctx.guild.id not in guilds:
-        await ctx.send(f'Сервер `{ctx.guild}` не имеет активных подписок. Если вы купили не публичную версию, напишите разработчику, чтобы ваш сервер был добавлен в список разрешённых.')
+        await ctx.send(f'Сервер `{ctx.guild}` не имеет активных подписок. Если вы купили приватную версию, напишите разработчику, чтобы ваш сервер был добавлен в список разрешённых.')
     else:
         emb = discord.Embed(description = f'Pong! `{round(client.latency * 1000)} ms`', colour = discord.Color.red(), timestamp = ctx.message.created_at)
         await ctx.send(embed = emb)
@@ -173,7 +173,7 @@ async def ping(ctx):
 async def info(ctx):
     await ctx.message.delete()
     if ctx.guild.id not in guilds:
-        await ctx.send(f'Сервер `{ctx.guild}` не имеет активных подписок. Если вы купили не публичную версию, напишите разработчику, чтобы ваш сервер был добавлен в список разрешённых.')
+        await ctx.send(f'Сервер `{ctx.guild}` не имеет активных подписок. Если вы купили приватную версию, напишите разработчику, чтобы ваш сервер был добавлен в список разрешённых.')
     else:
         emb = discord.Embed(colour = discord.Color.red())
         emb.set_author(name = client.user.name, url = 'https://warframe.fandom.com/wiki/Cephalon_Cy', icon_url = client.user.avatar_url)
@@ -191,7 +191,7 @@ async def invite(ctx):
     if ctx.message.author.id != 338714886001524737:
         await ctx.send(f'{ctx.author.mention}, вы не являетесь владельцем данного бота. Пашол нахуй')
     else:
-        emb = discord.Embed(description = '[Ссылка](https://discord.com/oauth2/authorize?client_id=762015251264569352&scope=bot&permissions=8) для быстрого приглашения меня на сервера. Даже не пытайтесь вызвать эту команду, если вы не сасиска#2472', colour = discord.Color.red())
+        emb = discord.Embed(description = '[Ссылка](https://discord.com/oauth2/authorize?client_id=762015251264569352&scope=bot&permissions=8) для быстрого приглашения меня на сервера. Даже не пытайтесь вызвать эту команду, если вы не сасиска#2472. А, и ещё - даже если вы пригласите меня - вы не сможете выполнять команды.', colour = discord.Color.red())
         await ctx.send(embed = emb)
 #Cephalon
         
