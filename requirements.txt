@@ -1,0 +1,6 @@
+discord.py[voice]
+discord.py
+aiohttp
+websockets
+chardet
+youtube-dl
