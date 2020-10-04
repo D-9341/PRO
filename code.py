@@ -33,11 +33,11 @@ guilds = [693929822543675455]
 #Misc
 @client.command(aliases = ['Guild', 'GUILD'])
 @commands.cooldown(1, 5, commands.BucketType.default)
-async def guild(ctx, guild: discord.Guild = None, sub = None):
+async def guild(ctx, guild: discord.Guild = None):
     await ctx.message.delete()
     if guild == None:
         guild = ctx.guild
-    if guild.id in guilds:
+    if ctx.guild.id in guilds:
         emb = discord.Embed(title = f'Информация о {guild}', description = 'Сервер находится в списке разрешённых. Вы можете выполнять большинство комманд с минимальным пингом, а ваши сообщения НЕ будут дублироваться на основной сервер бота.', colour = discord.Color.red(), timestamp = ctx.message.created_at)
         emb.add_field(name = 'ID сервера', value = guild.id)
         emb.add_field(name = 'Уровень сервера', value = guild.premium_tier)
