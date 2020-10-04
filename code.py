@@ -14,7 +14,7 @@ guilds = ['693929822543675455']
 
 #Cephalon
 @client.command(aliases = ['Join', 'JOIN'])
-async def join(self, ctx):
+async def join(ctx):
     await ctx.message.delete()
     if ctx.author.voice and ctx.author.voice.channel:
         channel = ctx.author.voice.channel
@@ -26,14 +26,17 @@ async def join(self, ctx):
 
 @client.command(aliases = ['Ping', 'PING'])
 @commands.cooldown(1, 5, commands.BucketType.default)
-async def ping(self, ctx):
+async def ping(ctx):
     await ctx.message.delete()
-    emb = discord.Embed(description = f'Pong! `{round(client.latency * 1000)} ms`', colour = discord.Color.red(), timestamp = ctx.message.created_at)
-    await ctx.send(embed = emb)
+    if ctx.guild.id not in guilds:
+        await ctx.send(f'Сервер `{ctx.guild}` не имеет активных подписок. Если вы купили не публичную версию, напишите разработчику, чтобы ваш сервер был добавлен в список разрешённых.')
+    else:
+        emb = discord.Embed(description = f'Pong! `{round(client.latency * 1000)} ms`', colour = discord.Color.red(), timestamp = ctx.message.created_at)
+        await ctx.send(embed = emb)
 
 @client.command(aliases = ['Info', 'INFO'])
 @commands.cooldown(1, 5, commands.BucketType.default)
-async def info(self, ctx):
+async def info(ctx):
     await ctx.message.delete()
     emb = discord.Embed(colour = discord.Color.red())
     emb.set_author(name = client.user.name, url = 'https://warframe.fandom.com/wiki/Cephalon_Cy', icon_url = client.user.avatar_url)
