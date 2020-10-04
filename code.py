@@ -10,7 +10,7 @@ from discord.utils import get
 client = commands.Bot(command_prefix = commands.when_mentioned_or('cy\\'), owner_id = 338714886001524737)
 client.remove_command('help')
 
-guilds = ['693929822543675455']
+guilds = ('693929822543675455')
 
 #Cephalon
 @client.command(aliases = ['Join', 'JOIN'])
@@ -38,14 +38,17 @@ async def ping(ctx):
 @commands.cooldown(1, 5, commands.BucketType.default)
 async def info(ctx):
     await ctx.message.delete()
-    emb = discord.Embed(colour = discord.Color.red())
-    emb.set_author(name = client.user.name, url = 'https://warframe.fandom.com/wiki/Cephalon_Cy', icon_url = client.user.avatar_url)
-    emb.add_field(name = 'Версия', value = '0.12.7.9018')
-    emb.add_field(name = 'Написан на', value = 'discord.py')
-    emb.add_field(name = 'Разработчик', value = 'сасиска#2472')
-    emb.add_field(name = 'Веб-сайт', value = '```http://ru-unioncraft.ru/```')
-    emb.set_footer(text = 'Данное приложение не имеет никакого причастия к игре Warframe.', icon_url = 'https://i.playground.ru/p/yVaOZNSTdgUTxmzy_qvzzQ.png')
-    await ctx.send(embed = emb)
+    if ctx.guild.id not in guilds:
+        await ctx.send(f'Сервер `{ctx.guild}` не имеет активных подписок. Если вы купили не публичную версию, напишите разработчику, чтобы ваш сервер был добавлен в список разрешённых.')
+    else:
+        emb = discord.Embed(colour = discord.Color.red())
+        emb.set_author(name = client.user.name, url = 'https://warframe.fandom.com/wiki/Cephalon_Cy', icon_url = client.user.avatar_url)
+        emb.add_field(name = 'Версия', value = '0.12.7.9018')
+        emb.add_field(name = 'Написан на', value = 'discord.py')
+        emb.add_field(name = 'Разработчик', value = 'сасиска#2472')
+        emb.add_field(name = 'Веб-сайт', value = '```http://ru-unioncraft.ru/```')
+        emb.set_footer(text = 'Данное приложение не имеет никакого причастия к игре Warframe.', icon_url = 'https://i.playground.ru/p/yVaOZNSTdgUTxmzy_qvzzQ.png')
+        await ctx.send(embed = emb)
 
 @client.command(aliases = ['invcy'])
 @commands.cooldown(1, 3, commands.BucketType.default)
