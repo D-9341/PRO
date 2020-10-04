@@ -17,7 +17,7 @@ time_dict = {'h': 3600, 's': 1, 'm': 60, 'd': 86400}
 guilds = [693929822543675455]
 members = [338714886001524737]
 
-class TimeConverter(commands.Converter):
+class TimeConverter(Converter):
     async def convert(ctx, argument):
         args = argument.lower()
         time = 0
