@@ -11,6 +11,57 @@ client = commands.Bot(command_prefix = commands.when_mentioned_or('cy\\'), owner
 client.remove_command('help')
 
 guilds = [693929822543675455, 735874149578440855]
+members = [338714886001524737]
+
+#Fun
+@client.command()
+@commands.cooldown(1, 3, commands.BucketType.default)
+async def rp(ctx):
+    await ctx.message.delete()
+    emb = discord.Embed(description = '[Ныа](https://www.youtube.com/watch?v=idmTSW9mfYI)', colour = discord.Color.orange())
+    await ctx.send(embed = emb)
+        
+@client.command(aliases = ['.rap'])
+@commands.cooldown(1, 5, commands.BucketType.default)
+async def rap(ctx):
+    await ctx.message.delete()
+    emb = discord.Embed(colour = ctx.author.color)
+    emb.set_image(url = 'https://thumbs.gfycat.com/MessyCarefreeHousefly-size_restricted.gif')
+    await ctx.send(embed = emb)
+        
+@client.command()
+@commands.cooldown(1, 5, commands.BucketType.default)
+async def zatka(ctx):
+    await ctx.message.delete()
+    emb = discord.Embed(title = 'Форма заявки для Набор кадров', colour = ctx.author.color)
+    emb.set_author(name = ctx.author, icon_url = ctx.author.avatar_url)
+    emb.add_field(name = '(1). ZATKA в STEAM.  ZATKA_KING#8406 в Discord.', value = 'возраст 14+  часовой пояс IL +0.', inline = False)
+    emb.add_field(name = '(2). Интересующая управление:', value = 'Discord', inline = False)
+    emb.add_field(name = '(3). Опыт администрирования:', value = 'Есть.', inline = False)
+    emb.add_field(name = 'творческие:', value = 'Есть.', inline = False)
+    emb.add_field(name = 'технические навыки:', value = 'Нет.', inline = False)
+    emb.add_field(name = '(4). Сколько часов готовы уделять работе', value = '[ 15+ в неделю ]', inline = False)
+    emb.add_field(name = 'в какое время дня свободны', value = '16:00 до 22:00+', inline = False)
+    await ctx.send(embed = emb)
+
+@client.command(aliases = ['Cu', 'CU'])
+@commands.cooldown(1, 5, commands.BucketType.default)
+async def cu(ctx):
+    await ctx.message.delete()
+    await ctx.send('Медь')
+    
+@client.command(aliases = ['c', 'C', 'coin', 'Coin', 'COIN', 'Coinflip', 'COINFLIP'])
+@commands.cooldown(3, 3, commands.BucketType.default)
+async def coinflip(ctx):
+    await ctx.message.delete()
+    emb = discord.Embed(description = 'Орёл!', colour = discord.Color.red())
+    emb.set_image(url = 'https://static.ayana.io/commands/flipcoin/heads.png')
+    emb1 = discord.Embed(description = 'Решка!', colour = discord.Color.red())
+    emb.set_image(url = 'https://static.ayana.io/commands/flipcoin/tails.png')
+    choices = [emb, emb1]
+    rancoin = random.choice(choices)
+     wait ctx.send(rancoin)
+#Fun
 
 #Embeds
 @client.command(aliases = ['ctx'])
@@ -122,7 +173,7 @@ async def emb_edit(ctx, arg, t = None, d = None, fu = None, img = None, f = None
         if f == None:
             f = ('')
         if fu == None:
-            fu = ('Cephalon Cy by сасиска#2472')
+            fu = ('')
         emb = discord.Embed(title = t, description = d, colour = c)
         emb.set_author(name = a, icon_url = a.avatar_url)
         emb.set_image(url = img)
@@ -260,7 +311,7 @@ async def help(ctx, arg = None):
     elif arg == 'unmute':
         await ctx.send('```cy\\unmute <@пинг/имя/ID> |причина|```')
     else:
-        emb = discord.Embed(description = 'Для этой команды не нужны аргументы', colour = discord.Color.orange())
+        emb = discord.Embed(description = 'Для этой команды не нужны аргументы', colour = discord.Color.red())
         emb.set_footer(text = 'Хотя, возможно, вы ввели команду неправильно?')
         await ctx.send(embed = emb)
 
