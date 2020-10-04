@@ -37,16 +37,15 @@ async def guild(ctx, guild: discord.Guild = None):
     await ctx.message.delete()
     if guild == None:
         guild = ctx.guild
-    if ctx.guild.id in guilds:
-        emb = discord.Embed(title = f'Информация о {guild}', description = 'Сервер находится в списке разрешённых. Вы можете выполнять большинство комманд с минимальным пингом, а ваши сообщения НЕ будут дублироваться на основной сервер бота.', colour = discord.Color.red(), timestamp = ctx.message.created_at)
-        emb.add_field(name = 'ID сервера', value = guild.id)
-        emb.add_field(name = 'Уровень сервера', value = guild.premium_tier)
-        emb.add_field(name = 'Люди, бустящие сервер', value = guild.premium_subscribers)
-        emb.add_field(name = 'Владелец сервера', value = guild.owner.mention, inline = False)
-        emb.add_field(name = 'Количество человек на сервере', value = guild.member_count)
-        emb.add_field(name = 'Дата создания сервера', value = guild.created_at.strftime("%a, %#d %B %Y, %I:%M %p UTC"), inline = False)
-        emb.set_thumbnail(url = guild.icon_url)
-        await ctx.send(embed = emb)
+    emb = discord.Embed(title = f'Информация о {guild}', colour = discord.Color.red(), timestamp = ctx.message.created_at)
+    emb.add_field(name = 'ID сервера', value = guild.id)
+    emb.add_field(name = 'Уровень сервера', value = guild.premium_tier)
+    emb.add_field(name = 'Люди, бустящие сервер', value = guild.premium_subscribers)
+    emb.add_field(name = 'Владелец сервера', value = guild.owner.mention, inline = False)
+    emb.add_field(name = 'Количество человек на сервере', value = guild.member_count)
+    emb.add_field(name = 'Дата создания сервера', value = guild.created_at.strftime("%a, %#d %B %Y, %I:%M %p UTC"), inline = False)
+    emb.set_thumbnail(url = guild.icon_url)
+    await ctx.send(embed = emb)
     
 @client.command()
 @commands.cooldown(1, 5, commands.BucketType.default)
