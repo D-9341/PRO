@@ -26,7 +26,7 @@ async def invite(ctx):
 async def help(ctx, arg = None):
     await ctx.message.delete()
     if arg == None:
-        emb = discord.Embed(title = "Меню команд Cephalon Cy", description = 'Существует дополнительная помощь по командам, пропишите cy\\help |команда|', colour = discord.Color.orange())
+        emb = discord.Embed(title = "Меню команд Cephalon Cy", description = 'Существует дополнительная помощь по командам, пропишите cy\\help |команда|', colour = discord.Color.red())
         emb.add_field(name = 'cy\\about', value = 'Показывает информацию о человеке.')
         emb.add_field(name = 'cy\\avatar', value = 'Показывает аватар человека.')
         emb.add_field(name = 'cy\\ban', value = 'Бан человека.')
