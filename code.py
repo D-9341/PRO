@@ -28,11 +28,8 @@ async def join(self, ctx):
 @commands.cooldown(1, 5, commands.BucketType.default)
 async def ping(self, ctx):
     await ctx.message.delete()
-    if ctx.guild.id not in guilds:
-        await ctx.send(f'Сервер `{ctx.guild}` не имеет активных подписок. Если вы купили не публичную версию, напишите разработчику, чтобы ваш сервер был добавлен в список разрешённых.')
-    else:
-        emb = discord.Embed(description = f'Pong! `{round(client.latency * 1000)} ms`', colour = discord.Color.red(), timestamp = ctx.message.created_at)
-        await ctx.send(embed = emb)
+    emb = discord.Embed(description = f'Pong! `{round(client.latency * 1000)} ms`', colour = discord.Color.red(), timestamp = ctx.message.created_at)
+    await ctx.send(embed = emb)
 
 @client.command(aliases = ['Info', 'INFO'])
 @commands.cooldown(1, 5, commands.BucketType.default)
