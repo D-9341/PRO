@@ -10,7 +10,7 @@ from discord.utils import get
 client = commands.Bot(command_prefix = commands.when_mentioned_or('cy\\'), owner_id = 338714886001524737)
 client.remove_command('help')
 
-guilds = 693929822543675455
+guilds = [693929822543675455]
 
 #Cephalon
 @client.command(aliases = ['Join', 'JOIN'])
