@@ -60,7 +60,7 @@ async def coinflip(ctx):
     emb.set_image(url = 'https://static.ayana.io/commands/flipcoin/tails.png')
     choices = [emb, emb1]
     rancoin = random.choice(choices)
-     wait ctx.send(rancoin)
+    await ctx.send(rancoin)
 #Fun
 
 #Embeds
