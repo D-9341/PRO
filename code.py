@@ -11,15 +11,147 @@ from discord.utils import get
 client = commands.Bot(command_prefix = commands.when_mentioned_or('cy\\'), owner_id = 338714886001524737)
 client.remove_command('help')
 
+time_regex = re.compile("(?:(\d{1,5})(h|s|m|d))+?")
+time_dict = {'h': 3600, 's': 1, 'm': 60, 'd': 86400}
+
 guilds = [693929822543675455, 735874149578440855]
 members = [338714886001524737]
+
+class TimeConverter(commands.Converter):
+    async def convert(ctx, argument):
+        args = argument.lower()
+        time = 0
+        matches = re.findall(time_regex, args)
+        for key, value in matches:
+            try:
+                time += time_dict[value] * float(key)
+            except KeyError:
+                raise commands.BadArgument(f'{value} не является правильным аргументом! Правильные: h|m|s|d')
+            except ValueError:
+                raise commands.BadArgument(f'{key} не число!')
+        return time
+
+#Misc
+@client.command(aliases = ['Guild', 'GUILD'])
+@commands.cooldown(1, 5, commands.BucketType.default)
+async def guild(ctx, guild: discord.Guild = None):
+    if guild == None:
+        guild = ctx.guild
+    await ctx.message.delete()
+    if ctx.guild.id not in guilds:
+        sub = 'Данный сервер не занесён в список разрешённых. Вы не сможете выполнять большую часть команд, однако сможете насладиться минимальным пингом.'
+    else:
+        sub = 'Данный сервер находится в списке разрешённых. Все пользователи могут использовать весь функционал бота с минимальным пингом.'
+    emb = discord.Embed(title = f'Информация о {guild}', description = sub colour = discord.Color.red(), timestamp = ctx.message.created_at)
+    emb.add_field(name = 'ID сервера', value = guild.id)
+    emb.add_field(name = 'Уровень сервера', value = guild.premium_tier)
+    emb.add_field(name = 'Люди, бустящие сервер', value = guild.premium_subscribers)
+    emb.add_field(name = 'Владелец сервера', value = guild.owner.mention, inline = False)
+    emb.add_field(name = 'Количество человек на сервере', value = guild.member_count)
+    emb.add_field(name = 'Дата создания сервера', value = guild.created_at.strftime("%a, %#d %B %Y, %I:%M %p UTC"), inline = False)
+    emb.set_thumbnail(url = guild.icon_url)
+    emb.set_footer(text = 'Cephalon Cy by сасиска#2472')
+    await ctx.send(embed = emb)
+    
+@client.command()
+@commands.cooldown(1, 5, commands.BucketType.default)
+async def role(ctx, *, role: discord.Role):
+    await ctx.message.delete()
+    if ctx.guild.id not in guilds:
+        await ctx.send(f'Сервер `{ctx.guild}` не имеет активных подписок. Если вы купили приватную версию, напишите разработчику, чтобы ваш сервер был добавлен в список разрешённых.')
+    else:
+        if role.mentionable == False:
+            role.mentionable = 'Нет'
+        elif role.mentionable == True:
+            role.mentionable = 'Да'
+        if role.managed == False:
+            role.managed = 'Нет'
+        elif role.managed == True:
+            role.managed = 'Да'
+        if role.hoist == False:
+            role.hoist = 'Нет'
+        elif role.hoist == True:
+            role.hoist = 'Да'
+        emb = discord.Embed(title = role.name, colour = role.colour)
+        emb.add_field(name = 'ID', value = role.id)
+        emb.add_field(name = 'Цвет', value = role.color)
+        emb.add_field(name = 'Упоминается?', value = role.mentionable)
+        emb.add_field(name = 'Управляется интеграцией?', value = role.managed)
+        emb.add_field(name = 'Позиция в списке', value = role.position)
+        emb.add_field(name = 'Создана', value = role.created_at.strftime("%A, %#d %B %Y, %I:%M %p UTC"), inline = False)
+        emb.add_field(name = 'Показывает участников отдельно?', value = role.hoist)
+        emb.set_footer(text = 'Cephalon Cy by сасиска#2472')
+        await ctx.send(embed = emb)
+    
+@client.command(aliases = ['Avatar', 'AVATAR'])
+@commands.cooldown(1, 5, commands.BucketType.default)
+async def avatar(ctx, member: discord.Member = None):
+    await ctx.message.delete()
+    if ctx.guild.id not in guilds:
+        await ctx.send(f'Сервер `{ctx.guild}` не имеет активных подписок. Если вы купили приватную версию, напишите разработчику, чтобы ваш сервер был добавлен в список разрешённых.')
+    else:
+        if member == None:
+            member = ctx.author
+        emb = discord.Embed(description = f'[Прямая ссылка]({member.avatar_url})', colour = member.color)
+        emb.set_author(name = member)
+        emb.set_image(url = member.avatar_url)
+        emb.set_footer(text = 'Cephalon Cy by сасиска#2472')
+        await ctx.send(embed = emb)
+    
+@client.command(aliases = ['me', 'Me', 'ME', 'About', 'ABOUT'])
+@commands.cooldown(1, 5, commands.BucketType.default)
+async def about(ctx, member: discord.Member = None):
+    await ctx.message.delete()
+    if ctx.guild.id not in guilds:
+        await ctx.send(f'Сервер `{ctx.guild}` не имеет активных подписок. Если вы купили приватную версию, напишите разработчику, чтобы ваш сервер был добавлен в список разрешённых.')
+    else:
+        if member == None:
+            member = ctx.author
+        if member.nick == None:
+            member.nick = 'Не указан'
+        if member.bot == False:
+            bot = 'Неа'
+        elif member.bot == True:
+            bot = 'Ага'
+        emb = discord.Embed(title = f'Информация о {member}', colour = member.color, timestamp = ctx.message.created_at)
+        emb.add_field(name = 'ID', value = member.id)
+        emb.add_field(name = 'Создан', value = member.created_at.strftime("%A, %#d %B %Y, %I:%M %p UTC"), inline = False)
+        emb.add_field(name = 'Вошёл', value = member.joined_at.strftime("%A, %#d %B %Y, %I:%M %p UTC"), inline = False)
+        emb.add_field(name = 'Упоминание', value = member.mention)
+        emb.add_field(name = 'Имя', value = member.name)
+        emb.add_field(name = 'Никнейм', value = member.nick)
+        emb.add_field(name = 'Статус', value = member.status)
+        emb.add_field(name = f'Роли [{len(member.roles)-1}]', value=' '.join([role.mention for role in member.roles[1:]]), inline = False)
+        emb.add_field(name = 'Высшая Роль', value = member.top_role.mention, inline = False)
+        emb.add_field(name = 'Бот?', value = bot)
+        emb.set_thumbnail(url = member.avatar_url)
+        emb.set_footer(text = 'Cephalon Cy by сасиска#2472')
+        await ctx.send(embed = emb)
+        
+@client.command()
+@commands.cooldown(1, 5, commands.BucketType.default)
+async def remind(ctx, time: TimeConverter, *, arg):
+    await ctx.message.delete()
+    if ctx.guild.id not in guilds:
+        await ctx.send(f'Сервер `{ctx.guild}` не имеет активных подписок. Если вы купили приватную версию, напишите разработчику, чтобы ваш сервер был добавлен в список разрешённых.')
+    else:
+        emb = discord.Embed(colour = ctx.author.color, timestamp = ctx.message.created_at)
+        emb.add_field(name = 'Напомню через', value = f'{time}s')
+        emb.add_field(name = 'О чём напомню?', value = arg)
+        await ctx.send(embed = emb, delete_after = time)
+        await asyncio.sleep(time)
+        emb = discord.Embed(colour = ctx.author.color, timestamp = ctx.message.created_at)
+        emb.add_field(name = 'Напомнил через', value = f'{time}s')
+        emb.add_field(name = 'Напоминаю о', value = arg)
+        await ctx.send(f'{ctx.author.mention}', embed = emb)
+#Misc
 
 #Fun
 @client.command()
 @commands.cooldown(1, 3, commands.BucketType.default)
 async def rp(ctx):
     await ctx.message.delete()
-    emb = discord.Embed(description = '[Ныа](https://www.youtube.com/watch?v=idmTSW9mfYI)', colour = discord.Color.orange())
+    emb = discord.Embed(description = '[Ныа](https://www.youtube.com/watch?v=idmTSW9mfYI)', colour = discord.Color.red())
     await ctx.send(embed = emb)
         
 @client.command(aliases = ['.rap'])
