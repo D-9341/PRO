@@ -14,7 +14,7 @@ client.remove_command('help')
 @commands.cooldown(1, 3, commands.BucketType.default)
 async def invite(ctx):
     await ctx.message.delete()
-    if ctx.message.author.id != owner_id:
+    if ctx.message.author.id != 338714886001524737:
         await ctx.send(f'{ctx.message.author}, вы не являетесь владельцем данного бота. Пашол нахуй')
     else:
         emb = discord.Embed(description = '[Ссылка](https://discord.com/oauth2/authorize?client_id=762015251264569352&scope=bot&permissions=8) для быстрого приглашения меня на сервера. Даже не пытайтесь вызвать эту команду, если вы не сасиска#2472')
