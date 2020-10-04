@@ -7,8 +7,7 @@ import discord
 from discord.ext import commands
 from discord.utils import get
 
-pr = ('cy\')
-client = commands.Bot(command_prefix = commands.when_mentioned_or(pr), owner_id = 338714886001524737)
+client = commands.Bot(command_prefix = commands.when_mentioned_or('cy\''), owner_id = 338714886001524737)
 client.remove_command('help')
                                                      
 @client.command(aliases = ['Help', 'HELP'])
