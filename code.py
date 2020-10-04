@@ -37,7 +37,7 @@ async def guild(ctx, guild: discord.Guild = None):
     await ctx.message.delete()
     if guild == None:
         guild = ctx.guild
-    if ctx.guild.id not in guilds:
+    if guild.id not in guilds:
         await ctx.send(f'Сервер `{guild}` не имеет активных подписок. Если вы купили приватную версию, напишите разработчику, чтобы ваш сервер был добавлен в список разрешённых.')
     else:
         emb = discord.Embed(title = f'Информация о {guild}', colour = discord.Color.red(), timestamp = ctx.message.created_at)
