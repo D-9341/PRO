@@ -38,7 +38,7 @@ async def guild(ctx, guild: discord.Guild = None):
     if guild == None:
         guild = ctx.guild
     await ctx.message.delete()
-    if ctx.guild.id not in guilds:
+    if guild.id not in guilds:
         sub = ('Данный сервер не занесён в список разрешённых. Вы не сможете выполнять большую часть команд, однако сможете насладиться минимальным пингом.')
     else:
         sub = ('Данный сервер находится в списке разрешённых. Все пользователи могут использовать весь функционал бота с минимальным пингом.')
