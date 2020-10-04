@@ -54,9 +54,9 @@ async def cu(ctx):
 @commands.cooldown(3, 3, commands.BucketType.default)
 async def coinflip(ctx):
     await ctx.message.delete()
-    emb = discord.Embed(description = 'Орёл!', colour = discord.Color.red())
+    emb = discord.Embed(description = 'Решка!', colour = discord.Color.red())
     emb.set_image(url = 'https://static.ayana.io/commands/flipcoin/heads.png')
-    emb1 = discord.Embed(description = 'Решка!', colour = discord.Color.red())
+    emb1 = discord.Embed(description = 'Орёл!', colour = discord.Color.red())
     emb.set_image(url = 'https://static.ayana.io/commands/flipcoin/tails.png')
     choices = [emb, emb1]
     rancoin = random.choice(choices)
