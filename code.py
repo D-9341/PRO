@@ -37,7 +37,7 @@ async def help(ctx, arg = None):
         emb.add_field(name = 'cy\\role', value = 'Показывает информацию о роли')
         emb.add_field(name = 'cy\\take', value = 'Забирает роль.', inline = False)
         emb.add_field(name = 'cy\\unmute', value = 'Принудительный размут человека.')
-        emb.add_field(name = 'Обозначение символов cy/help', value = '|| - опционально, <> - обязательно')
+        emb.add_field(name = 'Обозначение символов cy\\help', value = '|| - опционально, <> - обязательно')
         emb.set_footer(text = 'Cephalon Cy by сасиска#2472')
         await ctx.send(embed = emb)
     elif arg == 'about':
