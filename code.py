@@ -14,11 +14,8 @@ client.remove_command('help')
 time_regex = re.compile("(?:(\d{1,5})(h|s|m|d))+?")
 time_dict = {'h': 3600, 's': 1, 'm': 60, 'd': 86400}
 
-guilds = [693929822543675455]
-members = [338714886001524737]
-
-class TimeConverter(Converter):
-    async def convert(ctx, argument):
+class TimeConverter(commands.Converter):
+    async def convert(self, ctx, argument):
         args = argument.lower()
         time = 0
         matches = re.findall(time_regex, args)
@@ -31,6 +28,9 @@ class TimeConverter(Converter):
                 raise commands.BadArgument(f'{key} не число!')
         return time
 
+guilds = [693929822543675455]
+members = [338714886001524737]
+
 #Misc
 @client.command(aliases = ['Guild', 'GUILD'])
 @commands.cooldown(1, 5, commands.BucketType.default)
@@ -40,7 +40,7 @@ async def guild(ctx, guild: discord.Guild = None):
     await ctx.message.delete()
     if guild.id not in guilds:
         sub = ('Данный сервер не занесён в список разрешённых. Вы не сможете выполнять большую часть команд, однако сможете насладиться минимальным пингом.')
-    else:
+    elif guild.id in guilds:
         sub = ('Данный сервер находится в списке разрешённых. Все пользователи могут использовать весь функционал бота с минимальным пингом.')
     emb = discord.Embed(title = f'Информация о {guild}', description = f'{sub}', colour = discord.Color.red(), timestamp = ctx.message.created_at)
     emb.add_field(name = 'ID сервера', value = guild.id)
