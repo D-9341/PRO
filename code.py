@@ -36,18 +36,18 @@ guilds = [693929822543675455]
 async def guild(ctx, guild: discord.Guild = None):
     await ctx.message.delete()
     if guild == None:
-        guild = None
+        guild = ctx.guild
     if ctx.guild.id not in guilds:
-        await ctx.send(f'Сервер `{ctx.guild}` не имеет активных подписок. Если вы купили приватную версию, напишите разработчику, чтобы ваш сервер был добавлен в список разрешённых.')
+        await ctx.send(f'Сервер `{guild}` не имеет активных подписок. Если вы купили приватную версию, напишите разработчику, чтобы ваш сервер был добавлен в список разрешённых.')
     else:
-        emb = discord.Embed(title = f'Информация о {ctx.guild}', description = f'{subscription}', colour = discord.Color.red(), timestamp = ctx.message.created_at)
-        emb.add_field(name = 'ID сервера', value = ctx.guild.id)
-        emb.add_field(name = 'Уровень сервера', value = ctx.guild.premium_tier)
-        emb.add_field(name = 'Люди, бустящие сервер', value = ctx.guild.premium_subscribers)
-        emb.add_field(name = 'Владелец сервера', value = ctx.guild.owner.mention, inline = False)
-        emb.add_field(name = 'Количество человек на сервере', value = ctx.guild.member_count)
-        emb.add_field(name = 'Дата создания сервера', value = ctx.guild.created_at.strftime("%a, %#d %B %Y, %I:%M %p UTC"), inline = False)
-        emb.set_thumbnail(url = ctx.guild.icon_url)
+        emb = discord.Embed(title = f'Информация о {guild}', colour = discord.Color.red(), timestamp = ctx.message.created_at)
+        emb.add_field(name = 'ID сервера', value = guild.id)
+        emb.add_field(name = 'Уровень сервера', value = guild.premium_tier)
+        emb.add_field(name = 'Люди, бустящие сервер', value = guild.premium_subscribers)
+        emb.add_field(name = 'Владелец сервера', value = guild.owner.mention, inline = False)
+        emb.add_field(name = 'Количество человек на сервере', value = guild.member_count)
+        emb.add_field(name = 'Дата создания сервера', value = guild.created_at.strftime("%a, %#d %B %Y, %I:%M %p UTC"), inline = False)
+        emb.set_thumbnail(url = guild.icon_url)
         await ctx.send(embed = emb)
     
 @client.command()
