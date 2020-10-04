@@ -9,7 +9,17 @@ from discord.utils import get
 
 client = commands.Bot(command_prefix = commands.when_mentioned_or('cy\\'), owner_id = 338714886001524737)
 client.remove_command('help')
-                                                     
+
+@client.command(aliases = ['invcy'])
+@commands.cooldown(1, 3, commands.BucketType.default)
+async def invite(ctx):
+    await ctx.message.delete()
+    if ctx.message.author.id != owner_id:
+        return
+    else:
+        emb = discord.Embed(description = '[Ссылка](https://discord.com/oauth2/authorize?client_id=762015251264569352&scope=bot&permissions=8) для быстрого приглашения меня на сервера. Даже не пытайтесь вызвать эту команду, если вы не сасиска#2472')
+        await ctx.send(embed = emb)
+
 @client.command(aliases = ['Help', 'HELP'])
 @commands.cooldown(1, 3, commands.BucketType.default)
 @commands.has_permissions(kick_members = True)
