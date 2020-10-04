@@ -14,7 +14,7 @@ client.remove_command('help')
 time_regex = re.compile("(?:(\d{1,5})(h|s|m|d))+?")
 time_dict = {'h': 3600, 's': 1, 'm': 60, 'd': 86400}
 
-guilds = [693929822543675455, 735874149578440855]
+guilds = [693929822543675455]
 members = [338714886001524737]
 
 class TimeConverter(commands.Converter):
@@ -42,7 +42,7 @@ async def guild(ctx, guild: discord.Guild = None):
         sub = 'Данный сервер не занесён в список разрешённых. Вы не сможете выполнять большую часть команд, однако сможете насладиться минимальным пингом.'
     else:
         sub = 'Данный сервер находится в списке разрешённых. Все пользователи могут использовать весь функционал бота с минимальным пингом.'
-    emb = discord.Embed(title = f'Информация о {guild}', description = sub, colour = discord.Color.red(), timestamp = ctx.message.created_at)
+    emb = discord.Embed(title = f'Информация о {guild}', description = f'{sub}', colour = discord.Color.red(), timestamp = ctx.message.created_at)
     emb.add_field(name = 'ID сервера', value = guild.id)
     emb.add_field(name = 'Уровень сервера', value = guild.premium_tier)
     emb.add_field(name = 'Люди, бустящие сервер', value = guild.premium_subscribers)
