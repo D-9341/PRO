@@ -33,14 +33,15 @@ guilds = [693929822543675455]
 #Misc
 @client.command(aliases = ['Guild', 'GUILD'])
 @commands.cooldown(1, 5, commands.BucketType.default)
-async def guild(ctx, guild: discord.Guild = None):
+async def guild(ctx, guild: discord.Guild = None, sub = None):
     await ctx.message.delete()
     if guild == None:
         guild = ctx.guild
-    if guild.id not in guilds:
-        await ctx.send(f'Сервер `{guild}` не имеет активных подписок. Если вы купили приватную версию, напишите разработчику, чтобы ваш сервер был добавлен в список разрешённых.')
+    if ctx.guild.id not in guilds:
+        sub = 'Данный сервер не находится в списке разрешённых. Вы не сможете выполнять большинство команд, но сможете насладиться низким пингом.'
     else:
-        emb = discord.Embed(title = f'Информация о {guild}', colour = discord.Color.red(), timestamp = ctx.message.created_at)
+        sub = 'Сервер находится в списке разрешённых. Вы можете выполнять все команды с минимальным пингом.'
+        emb = discord.Embed(title = f'Информация о {guild}', description = f'{sub}' colour = discord.Color.red(), timestamp = ctx.message.created_at)
         emb.add_field(name = 'ID сервера', value = guild.id)
         emb.add_field(name = 'Уровень сервера', value = guild.premium_tier)
         emb.add_field(name = 'Люди, бустящие сервер', value = guild.premium_subscribers)
