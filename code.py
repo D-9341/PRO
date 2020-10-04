@@ -1,6 +1,7 @@
 import asyncio
 import random
 import datetime
+import re
 import json
 import os
 import discord
@@ -26,6 +27,7 @@ async def rp(ctx):
 async def rap(ctx):
     await ctx.message.delete()
     emb = discord.Embed(colour = ctx.author.color)
+    emb.set_author(name = ctx.autho, icon_url = ctx.author.icon_url)
     emb.set_image(url = 'https://thumbs.gfycat.com/MessyCarefreeHousefly-size_restricted.gif')
     await ctx.send(embed = emb)
         
@@ -54,10 +56,10 @@ async def cu(ctx):
 @commands.cooldown(3, 3, commands.BucketType.default)
 async def coinflip(ctx):
     await ctx.message.delete()
-    emb = discord.Embed(description = 'Решка!', colour = discord.Color.red())
+    emb = discord.Embed(description = 'Орёл!', colour = discord.Color.red())
     emb.set_image(url = 'https://static.ayana.io/commands/flipcoin/heads.png')
-    emb1 = discord.Embed(description = 'Орёл!', colour = discord.Color.red())
-    emb.set_image(url = 'https://static.ayana.io/commands/flipcoin/tails.png')
+    emb1 = discord.Embed(description = 'Решка!', colour = discord.Color.red())
+    emb1.set_image(url = 'https://static.ayana.io/commands/flipcoin/tails.png')
     choices = [emb, emb1]
     rancoin = random.choice(choices)
     await ctx.send(embed = rancoin)
