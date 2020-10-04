@@ -42,7 +42,7 @@ async def guild(ctx, guild: discord.Guild = None):
         sub = 'Данный сервер не занесён в список разрешённых. Вы не сможете выполнять большую часть команд, однако сможете насладиться минимальным пингом.'
     else:
         sub = 'Данный сервер находится в списке разрешённых. Все пользователи могут использовать весь функционал бота с минимальным пингом.'
-    emb = discord.Embed(title = f'Информация о {guild}', description = sub colour = discord.Color.red(), timestamp = ctx.message.created_at)
+    emb = discord.Embed(title = f'Информация о {guild}', description = sub, colour = discord.Color.red(), timestamp = ctx.message.created_at)
     emb.add_field(name = 'ID сервера', value = guild.id)
     emb.add_field(name = 'Уровень сервера', value = guild.premium_tier)
     emb.add_field(name = 'Люди, бустящие сервер', value = guild.premium_subscribers)
