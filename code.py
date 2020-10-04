@@ -16,13 +16,16 @@ guilds = [693929822543675455, 735874149578440855]
 @client.command(aliases = ['Join', 'JOIN'])
 async def join(ctx):
     await ctx.message.delete()
-    if ctx.author.voice and ctx.author.voice.channel:
-        channel = ctx.author.voice.channel
+    if ctx.guild.id not in guilds:
+        await ctx.send(f'Сервер `{ctx.guild}` не имеет активных подписок. Если вы купили не публичную версию, напишите разработчику, чтобы ваш сервер был добавлен в список разрешённых.')
     else:
-        emb = discord.Embed(description = 'Ты должен быть в канале, чтобы использовать это.', colour = discord.Color.orange())
-        await ctx.send(embed = emb)
-        return
-    vc = await channel.connect()
+        if ctx.author.voice and ctx.author.voice.channel:
+            channel = ctx.author.voice.channel
+        else:
+            emb = discord.Embed(description = 'Ты должен быть в канале, чтобы использовать это.', colour = discord.Color.orange())
+            await ctx.send(embed = emb)
+            return
+        vc = await channel.connect()
 
 @client.command(aliases = ['Ping', 'PING'])
 @commands.cooldown(1, 5, commands.BucketType.default)
