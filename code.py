@@ -140,7 +140,7 @@ async def on_command_error(ctx, error):
         await ctx.send(embed = emb)
 
 @client.event
-async def on_command_error(self, ctx, error):
+async def on_command_error(ctx, error):
     if isinstance(error, commands.CommandOnCooldown):
         await ctx.message.delete()
         emb = discord.Embed(description = f'{ctx.author.mention}, команда в кд, потерпи чутка!', colour = discord.Color.red())
