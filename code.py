@@ -30,7 +30,6 @@ class TimeConverter(commands.Converter):
 
 guilds = [693929822543675455, 735874149578440855]
          #SPELL               #test guild
-members = [468079847017676801]
 
 #Events
 @client.event
