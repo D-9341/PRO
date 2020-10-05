@@ -277,7 +277,6 @@ async def guild(ctx):
     emb = discord.Embed(title = f'Информация о {ctx.guild}', colour = discord.Color.red(), timestamp = ctx.message.created_at)
     emb.add_field(name = 'ID сервера', value = ctx.guild.id)
     emb.add_field(name = 'Уровень сервера', value = ctx.guild.premium_tier)
-    emb.add_field(name = 'Люди, бустящие сервер', value = ctx.guild.premium_subscribers)
     emb.add_field(name = 'Владелец сервера', value = ctx.guild.owner.mention, inline = False)
     emb.add_field(name = 'Количество человек на сервере', value = ctx.guild.member_count, inline = True)
     emb.add_field(name = 'Из них людей', value = len(list(filter(lambda m: not m.bot, ctx.guild.members))), inline = True)
