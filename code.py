@@ -272,19 +272,18 @@ async def clear(ctx, amount: int, confirm: str = None):
 #Misc
 @client.command(aliases = ['Guild', 'GUILD'])
 @commands.cooldown(1, 5, commands.BucketType.default)
-async def guild(ctx, guild: discord.Guild = None):
-    if guild == None:
-        guild = ctx.guild
+async def guild(ctx):
     await ctx.message.delete()
-    emb = discord.Embed(title = f'Информация о {guild}', colour = discord.Color.orange(), timestamp = ctx.message.created_at)
-    emb.add_field(name = 'ID сервера', value = guild.id)
-    emb.add_field(name = 'Уровень сервера', value = guild.premium_tier)
-    emb.add_field(name = 'Люди, бустящие сервер', value = guild.premium_subscribers)
-    emb.add_field(name = 'Владелец сервера', value = guild.owner.mention, inline = False)
-    emb.add_field(name = 'Количество человек на сервере', value = guild.member_count)
-    emb.add_field(name = 'Дата создания сервера', value = guild.created_at.strftime("%a, %#d %B %Y, %I:%M %p UTC"), inline = False)
-    emb.set_thumbnail(url = guild.icon_url)
-    emb.set_footer(text = 'Cephalon Cy by сасиска#2472')
+    emb = discord.Embed(title = f'Информация о {ctx.guild}', colour = discord.Color.red(), timestamp = ctx.message.created_at)
+    emb.add_field(name = 'ID сервера', value = ctx.guild.id)
+    emb.add_field(name = 'Уровень сервера', value = ctx.guild.premium_tier)
+    emb.add_field(name = 'Люди, бустящие сервер', value = ctx.guild.premium_subscribers)
+    emb.add_field(name = 'Владелец сервера', value = ctx.guild.owner.mention, inline = False)
+    emb.add_field(name = 'Количество человек на сервере', value = ctx.guild.member_count, inline = True)
+    emb.add_field(name = 'Из них людей', value = len(list(filter(lambda m: not m.bot, ctx.guild.members))), inline = True)
+    emb.add_field(name = 'Из них ботов', value = len(list(filter(lambda m: m.bot, ctx.guild.members))), inline = True)
+    emb.add_field(name = 'Дата создания сервера', value = ctx.guild.created_at.strftime("%a, %#d %B %Y, %I:%M %p UTC"), inline = False)
+    emb.set_thumbnail(url = ctx.guild.icon_url)
     await ctx.send(embed = emb)
     
 @client.command()
