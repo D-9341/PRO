@@ -28,7 +28,7 @@ class TimeConverter(commands.Converter):
                 raise commands.BadArgument(f'{key} не число!')
         return time
 
-guilds = [693929822543675455]
+guilds = [693929822543675455, 735874149578440855]
          #SPELL               #test guild
 
 #Events
