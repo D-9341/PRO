@@ -36,11 +36,11 @@ guilds = [693929822543675455]
 async def on_guild_join(guild):
     if guild.id not in guilds:
         channel = client.get_channel(693929823030214658)
-        emb = discord.Embed(description = f'Я был несанкционированно добавлен на сервер `{guild.name}` | ID {guild.id}', colour = discord.Color.green())
+        emb = discord.Embed(description = f'Я был несанкционированно добавлен на сервер `{guild.name}` | ID {guild.id}', colour = discord.Color.red())
         await channel.send(embed = emb)
     else:
         channel = client.get_channel(693929823030214658)
-        emb = discord.Embed(description = f'Я был санкционированно добавлен на сервер `{guild.name}` | ID {guild.id}', colour = discord.Color.green())
+        emb = discord.Embed(description = f'Я был санкционированно добавлен на сервер `{guild.name}` | ID {guild.id}', colour = discord.Color.red())
         await channel.send(embed = emb)
 #Events
 
