@@ -28,8 +28,21 @@ class TimeConverter(commands.Converter):
                 raise commands.BadArgument(f'{key} не число!')
         return time
 
-guilds = [693929822543675455, 735874149578440855]
+guilds = [693929822543675455]
          #SPELL               #test guild
+
+#Events
+@client.event
+async def on_guild_join(guild):
+    if guild.id not in guilds:
+        channel = client.get_channel(693929823030214658)
+        emb = discord.Embed(description = f'Я был несанкционированно добавлен на сервер `{guild.name}` | ID {guild.id}', colour = discord.Color.green())
+        await channel.send(embed = emb)
+    else:
+        channel = client.get_channel(693929823030214658)
+        emb = discord.Embed(description = f'Я был санкционированно добавлен на сервер `{guild.name}` | ID {guild.id}', colour = discord.Color.green())
+        await channel.send(embed = emb)
+#Events
 
 #Mod
 @client.command()
