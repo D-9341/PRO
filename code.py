@@ -570,7 +570,7 @@ async def edit(ctx, arg, *, text):
 async def pro(ctx):
     await ctx.message.delete()
     if ctx.guild.id not in guilds:
-        await ctx.send(f'Сервер `{ctx.guild}` не имеет активных подписок. Купить можно по [ссылке](https://qiwi.me/spell). Преймущества на сайте (ссылка на dashboard)')
+        await ctx.send(f'Сервер `{ctx.guild}` не имеет активных подписок. Купить можно по [ссылке](https://qiwi.me/spell). Преимущества: пинг не более 25ms, больший аптайм, защита от несанкционированного добавления на сервера.')
     else:
         await ctx.send(f'Сервер `{ctx.guild}` имеет активную подписку. Все пользователи могут пользоваться полным функционалом бота с минимальным пингом.')
 
