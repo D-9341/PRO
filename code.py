@@ -343,13 +343,8 @@ async def about(ctx, member: discord.Member = None):
             bot = 'Неа'
         elif member.bot == True:
             bot = 'Ага'
-        if member.id not in members:
-            sub = 'Пользователь не имеет активных подписок. Это ни на что не влияет, однако в скоро будущем - будет'
-        elif member.id in members:
-            sub = 'Пользователь имеет активную подписку. Это ни на что не влияет, однако в скором будущем - будет'
         emb = discord.Embed(title = f'Информация о {member}', colour = member.color, timestamp = ctx.message.created_at)
         emb.add_field(name = 'ID', value = member.id)
-        emb.add_filed(name = 'Подписчик?', value = f'{sub}')
         emb.add_field(name = 'Создан', value = member.created_at.strftime("%A, %#d %B %Y, %I:%M %p UTC"), inline = False)
         emb.add_field(name = 'Вошёл', value = member.joined_at.strftime("%A, %#d %B %Y, %I:%M %p UTC"), inline = False)
         emb.add_field(name = 'Упоминание', value = member.mention)
