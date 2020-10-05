@@ -565,6 +565,15 @@ async def edit(ctx, arg, *, text):
 #Embeds
 
 #Cephalon
+@client.command()
+@commands.cooldown(1, 3, commands.BucketType.default)
+async def pro(ctx):
+    await ctx.message.delete()
+    if ctx.guild.id not in guilds:
+        await ctx.send(f'Сервер `{ctx.guild}` не имеет активных подписок. Купить можно по [ссылке](https://qiwi.me/spell). Преймущества на сайте (ссылка на dashboard)')
+    else:
+        await ctx.send(f'Сервер `{ctx.guild}` имеет активную подписку. Все пользователи могут пользоваться полным функционалом бота с минимальным пингом.')
+
 @client.command(aliases = ['Join', 'JOIN'])
 async def join(ctx):
     await ctx.message.delete()
