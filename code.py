@@ -29,6 +29,7 @@ class TimeConverter(commands.Converter):
         return time
 
 guilds = [693929822543675455, 735874149578440855]
+         #SPELL               #test guild
 
 #Mod
 @client.command()
@@ -270,21 +271,6 @@ async def clear(ctx, amount: int, confirm: str = None):
 #Mod
 
 #Misc
-@client.command(aliases = ['Guild', 'GUILD'])
-@commands.cooldown(1, 5, commands.BucketType.default)
-async def guild(ctx):
-    await ctx.message.delete()
-    emb = discord.Embed(title = f'Информация о {ctx.guild}', colour = discord.Color.red(), timestamp = ctx.message.created_at)
-    emb.add_field(name = 'ID сервера', value = ctx.guild.id)
-    emb.add_field(name = 'Уровень сервера', value = ctx.guild.premium_tier)
-    emb.add_field(name = 'Владелец сервера', value = ctx.guild.owner.mention, inline = False)
-    emb.add_field(name = 'Количество человек на сервере', value = ctx.guild.member_count, inline = True)
-    emb.add_field(name = 'Из них людей', value = len(list(filter(lambda m: not m.bot, ctx.guild.members))), inline = True)
-    emb.add_field(name = 'Из них ботов', value = len(list(filter(lambda m: m.bot, ctx.guild.members))), inline = True)
-    emb.add_field(name = 'Дата создания сервера', value = ctx.guild.created_at.strftime("%a, %#d %B %Y, %I:%M %p UTC"), inline = False)
-    emb.set_thumbnail(url = ctx.guild.icon_url)
-    await ctx.send(embed = emb)
-    
 @client.command()
 @commands.cooldown(1, 5, commands.BucketType.default)
 async def role(ctx, *, role: discord.Role):
@@ -376,6 +362,14 @@ async def remind(ctx, time: TimeConverter, *, arg):
 #Misc
 
 #Fun
+@client.command()
+@commands.cooldown(1, 3, commands.BucketType.default)
+async def aye_balbec(ctx):
+    await ctx.message.delete()
+    emb = discord.Embed(colour = ctx.author.color)
+    emb.set_image(url = 'https://sun9-61.userapi.com/tja5cuQthduwgxq2yMigLiUxfYq_5fqiA6cJWg/sZOkbPajoSY.jpg')
+    await ctx.send(embed = emb)
+
 @client.command()
 @commands.cooldown(1, 3, commands.BucketType.default)
 async def rp(ctx):
@@ -628,7 +622,6 @@ async def help(ctx, arg = None):
         emb.add_field(name = 'cy\\say_everyone', value = 'Совмещает в себе команды everyone и say.')
         emb.add_field(name = 'cy\\everyone', value = 'Пишет сообщение от лица бота и пингует @everyone')
         emb.add_field(name = 'cy\\give', value = 'Выдаёт роль.', inline = False)
-        emb.add_field(name = 'cy\\guild', value = 'Показывает информацию о сервере.')
         emb.add_field(name = 'cy\\join', value = 'Бот заходит в голосовой канал.')
         emb.add_field(name = 'cy\\kick', value = 'Кик человека.')
         emb.add_field(name = 'cy\\mute', value = 'Мут человека.', inline = False)
