@@ -294,7 +294,7 @@ async def clear(ctx, amount: int, confirm: str = None):
 #Misc
 @commands.command(aliases = ['Guild', 'GUILD'])
 @commands.cooldown(1, 5, commands.BucketType.default)
-async def guild(self, ctx, guild: discord.Guild = None):
+async def guild(ctx, guild: discord.Guild = None):
     if ctx.guild.id in guilds:
         if guild == None:
             guild = ctx.guild
@@ -307,7 +307,6 @@ async def guild(self, ctx, guild: discord.Guild = None):
         emb.add_field(name = 'Количество человек на сервере', value = guild.member_count)
         emb.add_field(name = 'Дата создания сервера', value = guild.created_at.strftime("%a, %#d %B %Y, %I:%M %p UTC"), inline = False)
         emb.set_thumbnail(url = guild.icon_url)
-        emb.set_footer(text = 'Cephalon Cy by сасиска#2472')
         await ctx.send(embed = emb)
     else:
         emb = discord.Embed(description = f'Сервер `{ctx.guild}` не имеет активных подписок. Купить можно по [Ссылке](https://www.patreon.com/cephaloncy) Преимущества: пинг не более 25ms, больший аптайм, защита от несанкционированного добавления на сервера.', colour = discord.Color.red())
@@ -345,7 +344,7 @@ async def role(ctx, *, role: discord.Role):
     
 @client.command(aliases = ['Avatar', 'AVATAR'])
 @commands.cooldown(1, 5, commands.BucketType.default)
-async def avatar(ctx, member: discord.Member = None):
+async def avatar(ctx, *, member: discord.Member = None):
     await ctx.message.delete()
     if ctx.guild.id not in guilds:
         emb = discord.Embed(description = f'Сервер `{ctx.guild}` не имеет активных подписок. Купить можно по [Ссылке](https://www.patreon.com/cephaloncy)) Преимущества: пинг не более 25ms, больший аптайм, защита от несанкционированного добавления на сервера.', colour = discord.Color.red())
@@ -360,7 +359,7 @@ async def avatar(ctx, member: discord.Member = None):
     
 @client.command(aliases = ['me', 'Me', 'ME', 'About', 'ABOUT'])
 @commands.cooldown(1, 5, commands.BucketType.default)
-async def about(ctx, member: discord.Member = None):
+async def about(ctx, *, member: discord.Member = None):
     await ctx.message.delete()
     if ctx.guild.id not in guilds:
         emb = discord.Embed(description = f'Сервер `{ctx.guild}` не имеет активных подписок. Купить можно по [Ссылке](https://www.patreon.com/cephaloncy) Преимущества: пинг не более 25ms, больший аптайм, защита от несанкционированного добавления на сервера.', colour = discord.Color.red())
