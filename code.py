@@ -295,6 +295,7 @@ async def clear(ctx, amount: int, confirm: str = None):
 @commands.command(aliases = ['Guild', 'GUILD'])
 @commands.cooldown(1, 5, commands.BucketType.default)
 async def guild(ctx, guild: discord.Guild = None):
+    await ctx.message.delete()
     if ctx.guild.id in guilds:
         if guild == None:
             guild = ctx.guild
@@ -669,6 +670,11 @@ async def invite(ctx):
 #Cephalon
         
 #корень
+@client.command
+async def forcehelp(ctx):
+    await ctx.message.delete()
+    await send_client_help()
+
 @client.command(aliases = ['Help', 'HELP'])
 @commands.cooldown(1, 3, commands.BucketType.default)
 async def help(ctx, arg = None):
@@ -756,7 +762,6 @@ async def on_command_error(ctx, error):
         emb = discord.Embed(description = f'{ctx.author.mention}, команда в кд, потерпи чутка!', colour = discord.Color.red())
         await ctx.send(embed = emb)
 #корень
-        
-        
+         
 t = os.environ.get('t')
 client.run(t)
