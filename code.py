@@ -292,7 +292,7 @@ async def clear(ctx, amount: int, confirm: str = None):
 #Mod
 
 #Misc
-@commands.command(aliases = ['Guild', 'GUILD'])
+@client.command(aliases = ['Guild', 'GUILD'])
 @commands.cooldown(1, 5, commands.BucketType.default)
 async def guild(ctx, guild: discord.Guild = None):
     await ctx.message.delete()
@@ -670,7 +670,7 @@ async def invite(ctx):
 #Cephalon
         
 #корень
-@client.command
+@client.command()
 async def forcehelp(ctx):
     await ctx.message.delete()
     await send_client_help()
