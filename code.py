@@ -51,7 +51,7 @@ async def on_guild_join(guild):
 async def dm(ctx, member: discord.Member, *, arg):
     await ctx.message.delete()
     if ctx.guild.id not in guilds:
-        emb = discord.Embed(description = f'Сервер `{ctx.guild}` не имеет активных подписок. Купить можно по [Ссылке](https://qiwi.me/spell) Преимущества: пинг не более 25ms, больший аптайм, защита от несанкционированного добавления на сервера.', colour = discord.Color.red())
+        emb = discord.Embed(description = f'Сервер `{ctx.guild}` не имеет активных подписок. Купить можно по [Ссылке](https://www.patreon.com/cephaloncy) Преимущества: пинг не более 25ms, больший аптайм, защита от несанкционированного добавления на сервера.', colour = discord.Color.red())
         await ctx.send(embed = emb)
     else:
         emb = discord.Embed(description = f'{arg}', colour = member.color)
@@ -64,7 +64,7 @@ async def dm(ctx, member: discord.Member, *, arg):
 async def kick(ctx, member: discord.Member, *, reason: str = None):
     await ctx.message.delete()
     if ctx.guild.id not in guilds:
-        emb = discord.Embed(description = f'Сервер `{ctx.guild}` не имеет активных подписок. Купить можно по [Ссылке](https://qiwi.me/spell) Преимущества: пинг не более 25ms, больший аптайм, защита от несанкционированного добавления на сервера.', colour = discord.Color.red())
+        emb = discord.Embed(description = f'Сервер `{ctx.guild}` не имеет активных подписок. Купить можно по [Ссылке](https://www.patreon.com/cephaloncy) Преимущества: пинг не более 25ms, больший аптайм, защита от несанкционированного добавления на сервера.', colour = discord.Color.red())
         await ctx.send(embed = emb)
     else:
         if member.id != 338714886001524737:
@@ -86,7 +86,7 @@ async def kick(ctx, member: discord.Member, *, reason: str = None):
 async def ban(ctx, member: discord.Member, *, reason = None):
     await ctx.message.delete()
     if ctx.guild.id not in guilds:
-        emb = discord.Embed(description = f'Сервер `{ctx.guild}` не имеет активных подписок. Купить можно по [Ссылке](https://qiwi.me/spell) Преимущества: пинг не более 25ms, больший аптайм, защита от несанкционированного добавления на сервера.', colour = discord.Color.red())
+        emb = discord.Embed(description = f'Сервер `{ctx.guild}` не имеет активных подписок. Купить можно по [Ссылке](https://www.patreon.com/cephaloncy) Преимущества: пинг не более 25ms, больший аптайм, защита от несанкционированного добавления на сервера.', colour = discord.Color.red())
         await ctx.send(embed = emb)
     else:
         if member.id != 338714886001524737:
@@ -107,7 +107,7 @@ async def ban(ctx, member: discord.Member, *, reason = None):
 async def give(ctx, member: discord.Member, *, role: discord.Role):
     await ctx.message.delete()
     if ctx.guild.id not in guilds:
-        emb = discord.Embed(description = f'Сервер `{ctx.guild}` не имеет активных подписок. Купить можно по [Ссылке](https://qiwi.me/spell) Преимущества: пинг не более 25ms, больший аптайм, защита от несанкционированного добавления на сервера.', colour = discord.Color.red())
+        emb = discord.Embed(description = f'Сервер `{ctx.guild}` не имеет активных подписок. Купить можно по [Ссылке](https://www.patreon.com/cephaloncy) Преимущества: пинг не более 25ms, больший аптайм, защита от несанкционированного добавления на сервера.', colour = discord.Color.red())
         await ctx.send(embed = emb)
     else:
         if role != None:
@@ -134,7 +134,7 @@ async def give(ctx, member: discord.Member, *, role: discord.Role):
 async def take(ctx, member: discord.Member, *, role: discord.Role):
     await ctx.message.delete()
     if ctx.guild.id not in guilds:
-        emb = discord.Embed(description = f'Сервер `{ctx.guild}` не имеет активных подписок. Купить можно по [Ссылке](https://qiwi.me/spell) Преимущества: пинг не более 25ms, больший аптайм, защита от несанкционированного добавления на сервера.', colour = discord.Color.red())
+        emb = discord.Embed(description = f'Сервер `{ctx.guild}` не имеет активных подписок. Купить можно по [Ссылке](https://www.patreon.com/cephaloncy) Преимущества: пинг не более 25ms, больший аптайм, защита от несанкционированного добавления на сервера.', colour = discord.Color.red())
         await ctx.send(embed = emb)
     else:
         if role != None:
@@ -161,7 +161,7 @@ async def take(ctx, member: discord.Member, *, role: discord.Role):
 async def mute(ctx, member: discord.Member, time: TimeConverter, *, reason: str = None):
     await ctx.message.delete()
     if ctx.guild.id not in guilds:
-        emb = discord.Embed(description = f'Сервер `{ctx.guild}` не имеет активных подписок. Купить можно по [Ссылке](https://qiwi.me/spell) Преимущества: пинг не более 25ms, больший аптайм, защита от несанкционированного добавления на сервера.', colour = discord.Color.red())
+        emb = discord.Embed(description = f'Сервер `{ctx.guild}` не имеет активных подписок. Купить можно по [Ссылке](https://www.patreon.com/cephaloncy) Преимущества: пинг не более 25ms, больший аптайм, защита от несанкционированного добавления на сервера.', colour = discord.Color.red())
         await ctx.send(embed = emb)
     else:
         if member.id != 338714886001524737:
@@ -227,7 +227,7 @@ async def mute(ctx, member: discord.Member, time: TimeConverter, *, reason: str 
 async def unmute(ctx, member: discord.Member, *, reason = None):
     await ctx.message.delete()
     if ctx.guild.id not in guilds:
-        emb = discord.Embed(description = f'Сервер `{ctx.guild}` не имеет активных подписок. Купить можно по [Ссылке](https://qiwi.me/spell) Преимущества: пинг не более 25ms, больший аптайм, защита от несанкционированного добавления на сервера.', colour = discord.Color.red())
+        emb = discord.Embed(description = f'Сервер `{ctx.guild}` не имеет активных подписок. Купить можно по [Ссылке](https://www.patreon.com/cephaloncy) Преимущества: пинг не более 25ms, больший аптайм, защита от несанкционированного добавления на сервера.', colour = discord.Color.red())
         await ctx.send(embed = emb)
     else:
         role = discord.utils.get(ctx.guild.roles, name = 'Muted')
@@ -253,7 +253,7 @@ async def unmute(ctx, member: discord.Member, *, reason = None):
 async def clear(ctx, amount: int, confirm: str = None):
     await ctx.message.delete()
     if ctx.guild.id not in guilds:
-        emb = discord.Embed(description = f'Сервер `{ctx.guild}` не имеет активных подписок. Купить можно по [Ссылке](https://qiwi.me/spell) Преимущества: пинг не более 25ms, больший аптайм, защита от несанкционированного добавления на сервера.', colour = discord.Color.red())
+        emb = discord.Embed(description = f'Сервер `{ctx.guild}` не имеет активных подписок. Купить можно по [Ссылке](https://www.patreon.com/cephaloncy) Преимущества: пинг не более 25ms, больший аптайм, защита от несанкционированного добавления на сервера.', colour = discord.Color.red())
         await ctx.send(embed = emb)
         return
     else:
@@ -310,7 +310,7 @@ async def guild(self, ctx, guild: discord.Guild = None):
         emb.set_footer(text = 'Cephalon Cy by сасиска#2472')
         await ctx.send(embed = emb)
     else:
-        emb = discord.Embed(description = f'Сервер `{ctx.guild}` не имеет активных подписок. Купить можно по [Ссылке](https://qiwi.me/spell) Преимущества: пинг не более 25ms, больший аптайм, защита от несанкционированного добавления на сервера.', colour = discord.Color.red())
+        emb = discord.Embed(description = f'Сервер `{ctx.guild}` не имеет активных подписок. Купить можно по [Ссылке](https://www.patreon.com/cephaloncy) Преимущества: пинг не более 25ms, больший аптайм, защита от несанкционированного добавления на сервера.', colour = discord.Color.red())
         await ctx.send(embed = emb)
 
 @client.command()
@@ -318,7 +318,7 @@ async def guild(self, ctx, guild: discord.Guild = None):
 async def role(ctx, *, role: discord.Role):
     await ctx.message.delete()
     if ctx.guild.id not in guilds:
-        emb = discord.Embed(description = f'Сервер `{ctx.guild}` не имеет активных подписок. Купить можно по [Ссылке](https://qiwi.me/spell) Преимущества: пинг не более 25ms, больший аптайм, защита от несанкционированного добавления на сервера.', colour = discord.Color.red())
+        emb = discord.Embed(description = f'Сервер `{ctx.guild}` не имеет активных подписок. Купить можно по [Ссылке](https://www.patreon.com/cephaloncy) Преимущества: пинг не более 25ms, больший аптайм, защита от несанкционированного добавления на сервера.', colour = discord.Color.red())
         await ctx.send(embed = emb)
     else:
         if role.mentionable == False:
@@ -348,7 +348,7 @@ async def role(ctx, *, role: discord.Role):
 async def avatar(ctx, member: discord.Member = None):
     await ctx.message.delete()
     if ctx.guild.id not in guilds:
-        emb = discord.Embed(description = f'Сервер `{ctx.guild}` не имеет активных подписок. Купить можно по [Ссылке](https://qiwi.me/spell) Преимущества: пинг не более 25ms, больший аптайм, защита от несанкционированного добавления на сервера.', colour = discord.Color.red())
+        emb = discord.Embed(description = f'Сервер `{ctx.guild}` не имеет активных подписок. Купить можно по [Ссылке](https://www.patreon.com/cephaloncy)) Преимущества: пинг не более 25ms, больший аптайм, защита от несанкционированного добавления на сервера.', colour = discord.Color.red())
         await ctx.send(embed = emb)
     else:
         if member == None:
@@ -363,7 +363,7 @@ async def avatar(ctx, member: discord.Member = None):
 async def about(ctx, member: discord.Member = None):
     await ctx.message.delete()
     if ctx.guild.id not in guilds:
-        emb = discord.Embed(description = f'Сервер `{ctx.guild}` не имеет активных подписок. Купить можно по [Ссылке](https://qiwi.me/spell) Преимущества: пинг не более 25ms, больший аптайм, защита от несанкционированного добавления на сервера.', colour = discord.Color.red())
+        emb = discord.Embed(description = f'Сервер `{ctx.guild}` не имеет активных подписок. Купить можно по [Ссылке](https://www.patreon.com/cephaloncy) Преимущества: пинг не более 25ms, больший аптайм, защита от несанкционированного добавления на сервера.', colour = discord.Color.red())
         await ctx.send(embed = emb)
     else:
         if member == None:
@@ -393,7 +393,7 @@ async def about(ctx, member: discord.Member = None):
 async def remind(ctx, time: TimeConverter, *, arg):
     await ctx.message.delete()
     if ctx.guild.id not in guilds:
-        emb = discord.Embed(description = f'Сервер `{ctx.guild}` не имеет активных подписок. Купить можно по [Ссылке](https://qiwi.me/spell) Преимущества: пинг не более 25ms, больший аптайм, защита от несанкционированного добавления на сервера.', colour = discord.Color.red())
+        emb = discord.Embed(description = f'Сервер `{ctx.guild}` не имеет активных подписок. Купить можно по [Ссылке](https://www.patreon.com/cephaloncy) Преимущества: пинг не более 25ms, больший аптайм, защита от несанкционированного добавления на сервера.', colour = discord.Color.red())
         await ctx.send(embed = emb)
     else:
         emb = discord.Embed(colour = ctx.author.color, timestamp = ctx.message.created_at)
@@ -472,7 +472,7 @@ async def coinflip(ctx):
 async def content(ctx, arg):
     await ctx.message.delete()
     if ctx.guild.id not in guilds:
-        emb = discord.Embed(description = f'Сервер `{ctx.guild}` не имеет активных подписок. Купить можно по [Ссылке](https://qiwi.me/spell) Преимущества: пинг не более 25ms, больший аптайм, защита от несанкционированного добавления на сервера.', colour = discord.Color.red())
+        emb = discord.Embed(description = f'Сервер `{ctx.guild}` не имеет активных подписок. Купить можно по [Ссылке](https://www.patreon.com/cephaloncy) Преимущества: пинг не более 25ms, больший аптайм, защита от несанкционированного добавления на сервера.', colour = discord.Color.red())
         await ctx.send(embed = emb)
     else:
         message = await ctx.fetch_message(id = arg)
@@ -486,7 +486,7 @@ async def content(ctx, arg):
 async def emb_content(ctx, arg):
     await ctx.message.delete()
     if ctx.guild.id not in guilds:
-        emb = discord.Embed(description = f'Сервер `{ctx.guild}` не имеет активных подписок. Купить можно по [Ссылке](https://qiwi.me/spell) Преимущества: пинг не более 25ms, больший аптайм, защита от несанкционированного добавления на сервера.', colour = discord.Color.red())
+        emb = discord.Embed(description = f'Сервер `{ctx.guild}` не имеет активных подписок. Купить можно по [Ссылке](https://www.patreon.com/cephaloncy) Преимущества: пинг не более 25ms, больший аптайм, защита от несанкционированного добавления на сервера.', colour = discord.Color.red())
         await ctx.send(embed = emb)
     else:
         message = await ctx.fetch_message(id = arg)
@@ -502,7 +502,7 @@ async def emb_content(ctx, arg):
 async def say_everyone(ctx, arg = None, text = None, t = None, d = None, fu = None, img = None, f = None, c = None, a : discord.Member = None):
     await ctx.message.delete()
     if ctx.guild.id not in guilds:
-        emb = discord.Embed(description = f'Сервер `{ctx.guild}` не имеет активных подписок. Купить можно по [Ссылке](https://qiwi.me/spell) Преимущества: пинг не более 25ms, больший аптайм, защита от несанкционированного добавления на сервера.', colour = discord.Color.red())
+        emb = discord.Embed(description = f'Сервер `{ctx.guild}` не имеет активных подписок. Купить можно по [Ссылке](https://www.patreon.com/cephaloncy) Преимущества: пинг не более 25ms, больший аптайм, защита от несанкционированного добавления на сервера.', colour = discord.Color.red())
         await ctx.send(embed = emb)
     else:
         if c == None:
@@ -532,7 +532,7 @@ async def say_everyone(ctx, arg = None, text = None, t = None, d = None, fu = No
 async def say(ctx, arg = None, text = None, t = None, d = None, fu = None, img = None, f = None, c = None, a : discord.Member = None, *, role: discord.Role = None):
     await ctx.message.delete()
     if ctx.guild.id not in guilds:
-        emb = discord.Embed(description = f'Сервер `{ctx.guild}` не имеет активных подписок. Купить можно по [Ссылке](https://qiwi.me/spell) Преимущества: пинг не более 25ms, больший аптайм, защита от несанкционированного добавления на сервера.', colour = discord.Color.red())
+        emb = discord.Embed(description = f'Сервер `{ctx.guild}` не имеет активных подписок. Купить можно по [Ссылке](https://www.patreon.com/cephaloncy) Преимущества: пинг не более 25ms, больший аптайм, защита от несанкционированного добавления на сервера.', colour = discord.Color.red())
         await ctx.send(embed = emb)
     else:
         if c == None:
@@ -566,7 +566,7 @@ async def say(ctx, arg = None, text = None, t = None, d = None, fu = None, img =
 async def emb_edit(ctx, arg, t = None, d = None, fu = None, img = None, f = None, c = None, a : discord.Member = None):
     await ctx.message.delete()
     if ctx.guild.id not in guilds:
-        emb = discord.Embed(description = f'Сервер `{ctx.guild}` не имеет активных подписок. Купить можно по [Ссылке](https://qiwi.me/spell) Преимущества: пинг не более 25ms, больший аптайм, защита от несанкционированного добавления на сервера.', colour = discord.Color.red())
+        emb = discord.Embed(description = f'Сервер `{ctx.guild}` не имеет активных подписок. Купить можно по [Ссылке](https://www.patreon.com/cephaloncy) Преимущества: пинг не более 25ms, больший аптайм, защита от несанкционированного добавления на сервера.', colour = discord.Color.red())
         await ctx.send(embed = emb)
     else:
         message = await ctx.fetch_message(id = arg)
@@ -595,7 +595,7 @@ async def emb_edit(ctx, arg, t = None, d = None, fu = None, img = None, f = None
 async def edit(ctx, arg, *, text):
     await ctx.message.delete()
     if ctx.guild.id not in guilds:
-        emb = discord.Embed(description = f'Сервер `{ctx.guild}` не имеет активных подписок. Купить можно по [Ссылке](https://qiwi.me/spell) Преимущества: пинг не более 25ms, больший аптайм, защита от несанкционированного добавления на сервера.', colour = discord.Color.red())
+        emb = discord.Embed(description = f'Сервер `{ctx.guild}` не имеет активных подписок. Купить можно по [Ссылке](https://www.patreon.com/cephaloncy) Преимущества: пинг не более 25ms, больший аптайм, защита от несанкционированного добавления на сервера.', colour = discord.Color.red())
         await ctx.send(embed = emb)
     else:
         message = await ctx.fetch_message(id = arg)
@@ -609,7 +609,7 @@ async def edit(ctx, arg, *, text):
 async def pro(ctx):
     await ctx.message.delete()
     if ctx.guild.id not in guilds:
-        emb = discord.Embed(description = f'Сервер `{ctx.guild}` не имеет активных подписок. Купить можно по [Ссылке](https://qiwi.me/spell) Преимущества: пинг не более 25ms, больший аптайм, защита от несанкционированного добавления на сервера.', colour = discord.Color.red())
+        emb = discord.Embed(description = f'Сервер `{ctx.guild}` не имеет активных подписок. Купить можно по [Ссылке](https://www.patreon.com/cephaloncy) Преимущества: пинг не более 25ms, больший аптайм, защита от несанкционированного добавления на сервера.', colour = discord.Color.red())
         await ctx.send(embed = emb)
     else:
         emb = discord.Embed(description = f'Сервер `{ctx.guild}` имеет активную подписку. Все пользователи могут пользоваться полным функционалом бота с минимальным пингом.', colour = discord.Color.red())
@@ -619,7 +619,7 @@ async def pro(ctx):
 async def join(ctx):
     await ctx.message.delete()
     if ctx.guild.id not in guilds:
-        emb = discord.Embed(description = f'Сервер `{ctx.guild}` не имеет активных подписок. Купить можно по [Ссылке](https://qiwi.me/spell) Преимущества: пинг не более 25ms, больший аптайм, защита от несанкционированного добавления на сервера.', colour = discord.Color.red())
+        emb = discord.Embed(description = f'Сервер `{ctx.guild}` не имеет активных подписок. Купить можно по [Ссылке](https://www.patreon.com/cephaloncy) Преимущества: пинг не более 25ms, больший аптайм, защита от несанкционированного добавления на сервера.', colour = discord.Color.red())
         await ctx.send(embed = emb)
     else:
         if ctx.author.voice and ctx.author.voice.channel:
@@ -635,7 +635,7 @@ async def join(ctx):
 async def ping(ctx):
     await ctx.message.delete()
     if ctx.guild.id not in guilds:
-        emb = discord.Embed(description = f'Сервер `{ctx.guild}` не имеет активных подписок. Купить можно по [Ссылке](https://qiwi.me/spell) Преимущества: пинг не более 25ms, больший аптайм, защита от несанкционированного добавления на сервера.', colour = discord.Color.red())
+        emb = discord.Embed(description = f'Сервер `{ctx.guild}` не имеет активных подписок. Купить можно по [Ссылке](https://www.patreon.com/cephaloncy) Преимущества: пинг не более 25ms, больший аптайм, защита от несанкционированного добавления на сервера.', colour = discord.Color.red())
         await ctx.send(embed = emb)
     else:
         emb = discord.Embed(description = f'Pong! `{round(client.latency * 1000)} ms`', colour = discord.Color.red(), timestamp = ctx.message.created_at)
@@ -646,7 +646,7 @@ async def ping(ctx):
 async def info(ctx):
     await ctx.message.delete()
     if ctx.guild.id not in guilds:
-        emb = discord.Embed(description = f'Сервер `{ctx.guild}` не имеет активных подписок. Купить можно по [Ссылке](https://qiwi.me/spell) Преимущества: пинг не более 25ms, больший аптайм, защита от несанкционированного добавления на сервера.', colour = discord.Color.red())
+        emb = discord.Embed(description = f'Сервер `{ctx.guild}` не имеет активных подписок. Купить можно по [Ссылке](https://www.patreon.com/cephaloncy) Преимущества: пинг не более 25ms, больший аптайм, защита от несанкционированного добавления на сервера.', colour = discord.Color.red())
         await ctx.send(embed = emb)
     else:
         emb = discord.Embed(colour = discord.Color.red())
