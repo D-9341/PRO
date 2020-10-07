@@ -48,13 +48,13 @@ async def on_guild_join(guild):
 @client.command()
 @commands.has_permissions(view_audit_log = True)
 @commands.cooldown(1, 5, commands.BucketType.default)
-async def dm(ctx, member: discord.Member, *, arg):
+async def dm(ctx, member: discord.Member, *, text):
     await ctx.message.delete()
     if ctx.guild.id not in guilds:
         emb = discord.Embed(description = f'Сервер `{ctx.guild}` не имеет активных подписок. Купить можно по [Ссылке](https://www.patreon.com/cephaloncy) Преимущества: пинг не более 25ms, больший аптайм, защита от несанкционированного добавления на сервера.', colour = discord.Color.red())
         await ctx.send(embed = emb)
     else:
-        emb = discord.Embed(description = f'{arg}', colour = member.color)
+        emb = discord.Embed(description = f'{text}', colour = member.color)
         emb.set_author(name = ctx.author, icon_url = ctx.author.avatar_url)
         await member.send(embed = emb)
 
