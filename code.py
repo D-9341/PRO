@@ -345,7 +345,7 @@ async def role(ctx, *, role: discord.Role):
     
 @client.command(aliases = ['Avatar', 'AVATAR'])
 @commands.cooldown(1, 5, commands.BucketType.default)
-async def avatar(ctx, user: discord.User = None):
+async def avatar(ctx, user: discord.Member = None):
     await ctx.message.delete()
     if ctx.guild.id not in guilds:
         emb = discord.Embed(description = f'Сервер `{ctx.guild}` не имеет активных подписок. Купить можно по [Ссылке](https://www.patreon.com/cephaloncy)) Преимущества: пинг не более 25ms, больший аптайм, защита от несанкционированного добавления на сервера.', colour = discord.Color.red())
@@ -360,7 +360,7 @@ async def avatar(ctx, user: discord.User = None):
     
 @client.command(aliases = ['me', 'Me', 'ME', 'About', 'ABOUT'])
 @commands.cooldown(1, 5, commands.BucketType.default)
-async def about(ctx, member: discord.User = None):
+async def about(ctx, member: discord.Member = None):
     await ctx.message.delete()
     if ctx.guild.id not in guilds:
         emb = discord.Embed(description = f'Сервер `{ctx.guild}` не имеет активных подписок. Купить можно по [Ссылке](https://www.patreon.com/cephaloncy) Преимущества: пинг не более 25ms, больший аптайм, защита от несанкционированного добавления на сервера.', colour = discord.Color.red())
