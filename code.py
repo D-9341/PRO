@@ -48,13 +48,13 @@ async def on_guild_join(guild):
 @client.command()
 @commands.has_permissions(view_audit_log = True)
 @commands.cooldown(1, 5, commands.BucketType.default)
-async def dm(ctx, member: discord.Member, *, text):
+async def dm(ctx, member: discord.User, *, text):
     await ctx.message.delete()
     if ctx.guild.id not in guilds:
         emb = discord.Embed(description = f'Сервер `{ctx.guild}` не имеет активных подписок. Купить можно по [Ссылке](https://www.patreon.com/cephaloncy) Преимущества: пинг не более 25ms, больший аптайм, защита от несанкционированного добавления на сервера.', colour = discord.Color.red())
         await ctx.send(embed = emb)
     else:
-        emb = discord.Embed(description = f'{text}', colour = member.color)
+        emb = discord.Embed(description = f'{text}', colour = ctx.author.color)
         emb.set_author(name = ctx.author, icon_url = ctx.author.avatar_url)
         await member.send(embed = emb)
 
@@ -345,22 +345,22 @@ async def role(ctx, *, role: discord.Role):
     
 @client.command(aliases = ['Avatar', 'AVATAR'])
 @commands.cooldown(1, 5, commands.BucketType.default)
-async def avatar(ctx, *, member: discord.Member = None):
+async def avatar(ctx, user: discord.User = None):
     await ctx.message.delete()
     if ctx.guild.id not in guilds:
         emb = discord.Embed(description = f'Сервер `{ctx.guild}` не имеет активных подписок. Купить можно по [Ссылке](https://www.patreon.com/cephaloncy)) Преимущества: пинг не более 25ms, больший аптайм, защита от несанкционированного добавления на сервера.', colour = discord.Color.red())
         await ctx.send(embed = emb)
     else:
-        if member == None:
-            member = ctx.author
-        emb = discord.Embed(description = f'[Прямая ссылка]({member.avatar_url})', colour = member.color)
-        emb.set_author(name = member)
-        emb.set_image(url = member.avatar_url)
+        if user == None:
+            user = ctx.author
+        emb = discord.Embed(description = f'[Прямая ссылка]({user.avatar_url})', colour = user.color)
+        emb.set_author(name = user)
+        emb.set_image(url = user.avatar_url)
         await ctx.send(embed = emb)
     
 @client.command(aliases = ['me', 'Me', 'ME', 'About', 'ABOUT'])
 @commands.cooldown(1, 5, commands.BucketType.default)
-async def about(ctx, *, member: discord.Member = None):
+async def about(ctx, member: discord.User = None):
     await ctx.message.delete()
     if ctx.guild.id not in guilds:
         emb = discord.Embed(description = f'Сервер `{ctx.guild}` не имеет активных подписок. Купить можно по [Ссылке](https://www.patreon.com/cephaloncy) Преимущества: пинг не более 25ms, больший аптайм, защита от несанкционированного добавления на сервера.', colour = discord.Color.red())
@@ -673,7 +673,7 @@ async def invite(ctx):
 @client.command()
 async def forcehelp(ctx):
     await ctx.message.delete()
-    await send_client_help()
+    await send_bot_help()
 
 @client.command(aliases = ['Help', 'HELP'])
 @commands.cooldown(1, 3, commands.BucketType.default)
