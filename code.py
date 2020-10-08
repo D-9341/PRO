@@ -458,9 +458,9 @@ async def cu(ctx):
 async def coinflip(ctx):
     await ctx.message.delete()
     emb = discord.Embed(description = 'Орёл!', colour = discord.Color.red())
-    emb.set_image(url = 'https://static.ayana.io/commands/flipcoin/heads.png')
+    emb.set_image(url = 'https://cdn.discordapp.com/attachments/524213591084105729/763835275930632252/-removebg-preview.png')
     emb1 = discord.Embed(description = 'Решка!', colour = discord.Color.red())
-    emb1.set_image(url = 'https://static.ayana.io/commands/flipcoin/tails.png')
+    emb1.set_image(url = 'https://cdn.discordapp.com/attachments/524213591084105729/763837699240099890/-removebg-preview.png')
     choices = [emb, emb1]
     rancoin = random.choice(choices)
     await ctx.send(embed = rancoin)
