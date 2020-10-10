@@ -673,7 +673,7 @@ async def invite(ctx):
 @client.command()
 async def forcehelp(ctx):
     await ctx.message.delete()
-    await send_bot_help()
+    await ctx.send_client_help()
 
 @client.command(aliases = ['Help', 'HELP'])
 @commands.cooldown(1, 3, commands.BucketType.default)
