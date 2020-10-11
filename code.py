@@ -70,12 +70,15 @@ async def kick(ctx, member: discord.Member, *, reason: str = None):
         if member.id != 338714886001524737:
             if reason == None:
                 reason = 'Не указана.'
-            emb = discord.Embed(colour = member.color)
-            emb.set_author(name = ctx.author, icon_url = ctx.author.avatar_url)
-            emb.add_field(name = 'Был кикнут', value = member.mention)
-            emb.add_field(name = 'По причине', value = reason)
-            await ctx.send(embed = emb)
-            await member.kick(reason = reason)
+            if ctx.author.top_role == member.top_role:
+                await ctx.send(f'{ctx.author.mention}, ваша высшая роль равна высшей роли {member.mention}. Отклонено')
+            else:
+                emb = discord.Embed(colour = member.color)
+                emb.set_author(name = ctx.author, icon_url = ctx.author.avatar_url)
+                emb.add_field(name = 'Был кикнут', value = member.mention)
+                emb.add_field(name = 'По причине', value = reason)
+                await ctx.send(embed = emb)
+                await member.kick(reason = reason)
         else:
             emb = discord.Embed(description = f'Извините, {ctx.author.mention}, но вы не можете кикнуть моего создателя!', colour = discord.Color.red())
             await ctx.send(embed = emb)
@@ -92,12 +95,15 @@ async def ban(ctx, member: discord.Member, *, reason = None):
         if member.id != 338714886001524737:
             if reason == None:
                 reason = 'Не указана.'
-            emb = discord.Embed(colour = member.color)
-            emb.set_author(name = ctx.author, icon_url = ctx.author.avatar_url)
-            emb.add_field(name = 'Был кикнут', value = member.mention)
-            emb.add_field(name = 'По причине', value = reason)
-            await ctx.send(embed = emb)
-            await member.ban(reason = reason)
+            if ctx.author.top_role == member.top_role:
+                await ctx.send(f'{ctx.author.mention}, ваша высшая роль равна высшей роли {member.mention}. Отклонено')
+            else:
+                emb = discord.Embed(colour = member.color)
+                emb.set_author(name = ctx.author, icon_url = ctx.author.avatar_url)
+                emb.add_field(name = 'Был кикнут', value = member.mention)
+                emb.add_field(name = 'По причине', value = reason)
+                await ctx.send(embed = emb)
+                await member.ban(reason = reason)
         else:
             emb = discord.Embed(description = f'Извините, {ctx.author.mention}, но вы не можете забанить моего создателя!', colour = discord.Color.red())
             await ctx.send(embed = emb)
