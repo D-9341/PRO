@@ -71,7 +71,8 @@ async def kick(ctx, member: discord.Member, *, reason: str = None):
             if reason == None:
                 reason = 'Не указана.'
             if ctx.author.top_role == member.top_role:
-                await ctx.send(f'{ctx.author.mention}, ваша высшая роль равна высшей роли {member.mention}. Отклонено')
+                emb = discord.Embed(description = f'{ctx.author.mention}, ваша высшая роль равна высшей роли {member.mention}. Кик отклонён.', colour = discord.Color.red())
+                await ctx.send(embed = emb)
             else:
                 emb = discord.Embed(colour = member.color)
                 emb.set_author(name = ctx.author, icon_url = ctx.author.avatar_url)
@@ -96,7 +97,8 @@ async def ban(ctx, member: discord.Member, *, reason = None):
             if reason == None:
                 reason = 'Не указана.'
             if ctx.author.top_role == member.top_role:
-                await ctx.send(f'{ctx.author.mention}, ваша высшая роль равна высшей роли {member.mention}. Отклонено')
+                emb = discord.Embed(description = f'{ctx.author.mention}, ваша высшая роль равна высшей роли {member.mention}. Бан отклонён.', colour = discord.Color.red())
+                await ctx.send(embed = emb)
             else:
                 emb = discord.Embed(colour = member.color)
                 emb.set_author(name = ctx.author, icon_url = ctx.author.avatar_url)
