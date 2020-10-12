@@ -307,17 +307,21 @@ async def guild(ctx, guild: discord.Guild = None):
     if ctx.guild.id in guilds:
         if guild == None:
             guild = ctx.guild
-        emb = discord.Embed(title = f'Информация о {guild}', colour = discord.Color.green(), timestamp = ctx.message.created_at)
+		statuses = [len(list(filter(lambda m: str(m.status) == "online", ctx.guild.members))),
+					len(list(filter(lambda m: str(m.status) == "idle", ctx.guild.members))),
+					len(list(filter(lambda m: str(m.status) == "dnd", ctx.guild.members))),
+					len(list(filter(lambda m: str(m.status) == "offline", ctx.guild.members)))]
+        emb = discord.Embed(title = f'Информация о {guild}', colour = discord.Color.red(), timestamp = ctx.message.created_at)
         emb.add_field(name = 'ID сервера', value = guild.id)
         emb.add_field(name = 'Уровень сервера', value = guild.premium_tier)
         emb.add_field(name = 'Люди, бустящие сервер', value = guild.premium_subscribers)
         emb.add_field(name = 'Количество человек на сервере', value = guild.member_count)
+        emb.add_field(name = 'Статусы', value = f'🟢 {statuses[0]} 🟠 {statuses[1]} 🔴 {statuses[2]} ⚪ {statuses[3]}')
         if len(guild.roles) >= 15:
             emb.add_field(name = f'Роли', value = 'Слишком много', inline = False)
         else:
             emb.add_field(name = f'Роли [{len(guild.roles)-1}]', value = ' '.join([role.mention for role in guild.roles[1:]]), inline = False)
-        emb.add_field(name = 'Дата создания сервера', value = guild.created_at.strftime("%a, %#d %B %Y, %I:%M %p UTC"), inline = False)
-        emb.set_footer(text = 'Обратите внимание, что это Бета версия основного бота.')
+        emb.add_field(name = 'Дата создания сервера', value = guild.created_at.strftime('%d/%m/%Y %H:%M:%S UTC'), inline = False)
         emb.set_thumbnail(url = guild.icon_url)
         await ctx.send(embed = emb)
     else:
@@ -350,7 +354,7 @@ async def role(ctx, *, role: discord.Role):
         emb.add_field(name = 'Упоминается?', value = role.mentionable)
         emb.add_field(name = 'Управляется интеграцией?', value = role.managed)
         emb.add_field(name = 'Позиция в списке', value = role.position)
-        emb.add_field(name = 'Создана', value = role.created_at.strftime("%A, %#d %B %Y, %I:%M %p UTC"), inline = False)
+        emb.add_field(name = 'Создана', value = role.created_at.strftime('%d/%m/%Y %H:%M:%S UTC'), inline = False)
         emb.add_field(name = 'Показывает участников отдельно?', value = role.hoist)
         await ctx.send(embed = emb)
     
@@ -387,8 +391,8 @@ async def about(ctx, member: discord.Member = None):
             bot = 'Ага'
         emb = discord.Embed(title = f'Информация о {member}', colour = member.color, timestamp = ctx.message.created_at)
         emb.add_field(name = 'ID', value = member.id)
-        emb.add_field(name = 'Создан', value = member.created_at.strftime("%A, %#d %B %Y, %I:%M %p UTC"), inline = False)
-        emb.add_field(name = 'Вошёл', value = member.joined_at.strftime("%A, %#d %B %Y, %I:%M %p UTC"), inline = False)
+        emb.add_field(name = 'Создан', value = member.created_at.strftime('%d/%m/%Y %H:%M:%S UTC'), inline = False)
+        emb.add_field(name = 'Вошёл', value = member.joined_at.strftime('%d/%m/%Y %H:%M:%S UTC'), inline = False)
         emb.add_field(name = 'Упоминание', value = member.mention)
         emb.add_field(name = 'Имя', value = member.name)
         emb.add_field(name = 'Никнейм', value = member.nick)
