@@ -650,7 +650,7 @@ async def ping(ctx):
     else:
         emb = discord.Embed(description = f'Pong!', colour = discord.Color.red(), timestamp = ctx.message.created_at)
         message = await ctx.send(embed = emb)
-        emb1 = discord.Embed(description = f'Pong! `{round(client.latency * 1000)} ms`', coloue = discord.Color.red(), timestamp = ctx.message.created_at)
+        emb1 = discord.Embed(description = f'Pong! `{round(client.latency * 1000)} ms`', colour = discord.Color.red(), timestamp = ctx.message.created_at)
         await message.edit(embed = emb1)
 
 @client.command(aliases = ['Info', 'INFO'])
