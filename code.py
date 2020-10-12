@@ -307,15 +307,13 @@ async def guild(ctx, guild: discord.Guild = None):
     if ctx.guild.id in guilds:
         if guild == None:
             guild = ctx.guild
-        statuses = [len(list(filter(lambda m: str(m.status) == "online", ctx.guild.members))), len(list(filter(lambda m: str(m.status) == "idle", ctx.guild.members))), len(list(filter(lambda m: str(m.status) == "dnd", ctx.guild.members))), len(list(filter(lambda m: str(m.status) == "offline", ctx.guild.members)))]
         emb = discord.Embed(title = f'Информация о {guild}', colour = discord.Color.red(), timestamp = ctx.message.created_at)
         emb.add_field(name = 'ID сервера', value = guild.id)
         emb.add_field(name = 'Уровень сервера', value = guild.premium_tier)
         emb.add_field(name = 'Люди, бустящие сервер', value = guild.premium_subscribers)
         emb.add_field(name = 'Количество человек на сервере', value = guild.member_count)
-        emb.add_field(name = 'Статусы', value = f'🟢 {statuses[0]} 🟠 {statuses[1]} 🔴 {statuses[2]} ⚪ {statuses[3]}')
         if len(guild.roles) >= 15:
-            emb.add_field(name = f'Роли', value = 'Слишком много', inline = False)
+            emb.add_field(name = 'Роли', value = f'Слишком много ({len(guild.roles)-1})', inline = False)
         else:
             emb.add_field(name = f'Роли [{len(guild.roles)-1}]', value = ' '.join([role.mention for role in guild.roles[1:]]), inline = False)
         emb.add_field(name = 'Дата создания сервера', value = guild.created_at.strftime('%d/%m/%Y %H:%M:%S UTC'), inline = False)
