@@ -648,8 +648,10 @@ async def ping(ctx):
         emb = discord.Embed(description = f'Сервер `{ctx.guild}` не имеет активных подписок. Купить можно по [Ссылке](https://www.patreon.com/cephaloncy) Преимущества: пинг не более 25ms, больший аптайм, защита от несанкционированного добавления на сервера.', colour = discord.Color.red())
         await ctx.send(embed = emb)
     else:
-        emb = discord.Embed(description = f'Pong! `{round(client.latency * 1000)} ms`', colour = discord.Color.red(), timestamp = ctx.message.created_at)
-        await ctx.send(embed = emb)
+        emb = discord.Embed(description = f'Pong!', colour = discord.Color.red(), timestamp = ctx.message.created_at)
+        message = await ctx.send(embed = emb)
+        emb1 = discord.Embed(description = f'Pong! `{round(client.latency * 1000)} ms`', timestamp = ctx.message.created_at)
+        await message.edit(embed = emb1)
 
 @client.command(aliases = ['Info', 'INFO'])
 @commands.cooldown(1, 5, commands.BucketType.default)
