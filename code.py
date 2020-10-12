@@ -437,7 +437,7 @@ async def rap(ctx):
     await ctx.message.delete()
     emb = discord.Embed(colour = ctx.author.color)
     emb.set_author(name = ctx.author, icon_url = ctx.author.avatar_url)
-    emb.set_footer(url = 'https://thumbs.gfycat.com/MessyCarefreeHousefly-size_restricted.gif')
+    emb.set_image(url = 'https://thumbs.gfycat.com/MessyCarefreeHousefly-size_restricted.gif')
     await ctx.send(embed = emb)
         
 @client.command()
