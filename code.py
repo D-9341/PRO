@@ -307,14 +307,17 @@ async def guild(ctx, guild: discord.Guild = None):
     if ctx.guild.id in guilds:
         if guild == None:
             guild = ctx.guild
-        await ctx.message.delete()
-        emb = discord.Embed(title = f'Информация о {guild}', colour = discord.Color.red(), timestamp = ctx.message.created_at)
+        emb = discord.Embed(title = f'Информация о {guild}', colour = discord.Color.green(), timestamp = ctx.message.created_at)
         emb.add_field(name = 'ID сервера', value = guild.id)
         emb.add_field(name = 'Уровень сервера', value = guild.premium_tier)
         emb.add_field(name = 'Люди, бустящие сервер', value = guild.premium_subscribers)
-        emb.add_field(name = 'Владелец сервера', value = guild.owner.mention, inline = False)
         emb.add_field(name = 'Количество человек на сервере', value = guild.member_count)
+        if len(guild.roles) >= 15:
+            emb.add_field(name = f'Роли', value = 'Слишком много', inline = False)
+        else:
+            emb.add_field(name = f'Роли [{len(guild.roles)-1}]', value = ' '.join([role.mention for role in guild.roles[1:]]), inline = False)
         emb.add_field(name = 'Дата создания сервера', value = guild.created_at.strftime("%a, %#d %B %Y, %I:%M %p UTC"), inline = False)
+        emb.set_footer(text = 'Обратите внимание, что это Бета версия основного бота.')
         emb.set_thumbnail(url = guild.icon_url)
         await ctx.send(embed = emb)
     else:
@@ -678,11 +681,6 @@ async def invite(ctx):
 #Cephalon
         
 #корень
-@client.command()
-async def forcehelp(ctx):
-    await ctx.message.delete()
-    await ctx.send_client_help()
-
 @client.command(aliases = ['Help', 'HELP'])
 @commands.cooldown(1, 3, commands.BucketType.default)
 async def help(ctx, arg = None):
@@ -695,12 +693,13 @@ async def help(ctx, arg = None):
         emb.add_field(name = 'cy\\clear', value = 'Очистка чата.')
         emb.add_field(name = 'cy\\dm', value = 'Пишет участнику любой написанный текст.')
         emb.add_field(name = 'cy\\edit', value = 'Редактирует сообщение.', inline = False)
-        emb.add_field(name = 'cy\\say', value = 'От лица бота отправляется высоконастраеваемый эмбед. Может использоваться как say, так и emb')
+        emb.add_field(name = 'cy\\say', value = 'От лица бота отправляется высоконастраеваемый эмбед. Может использоваться как для написания текстов, так и для отправки эмбедов.')
         emb.add_field(name = 'cy\\emb_ctx', value = 'Позволяет увидеть контент эмбеда.')
         emb.add_field(name = 'cy\\emb_edit', value = 'Редактирует эмбед. Работает как VAULTBOT', inline = False)
         emb.add_field(name = 'cy\\say_everyone', value = 'Совмещает в себе команды everyone и say.')
         emb.add_field(name = 'cy\\everyone', value = 'Пишет сообщение от лица бота и пингует @everyone')
         emb.add_field(name = 'cy\\give', value = 'Выдаёт роль.', inline = False)
+        emb.add_field(name = 'cy\\guild', value = 'Показывает информацию о сервере.')
         emb.add_field(name = 'cy\\join', value = 'Бот заходит в голосовой канал.')
         emb.add_field(name = 'cy\\kick', value = 'Кик человека.')
         emb.add_field(name = 'cy\\mute', value = 'Мут человека.', inline = False)
@@ -713,39 +712,39 @@ async def help(ctx, arg = None):
         emb.set_footer(text = 'Cephalon Cy by сасиска#2472')
         await ctx.send(embed = emb)
     elif arg == 'about':
-        await ctx.send('```cy\\about |@пинг/имя/ID|```')
+        await ctx.send('```cy\\about |@пинг|```')
     elif arg == 'avatar':
-        await ctx.send('```cy\\avatar |@пинг/имя/ID|```')
+        await ctx.send('```cy\\avatar |@пинг|```')
     elif arg == 'ban':
-        await ctx.send('```cy\\ban <@пинг/имя/ID> |причина|```')
+        await ctx.send('```cy\\ban <@пинг> |причина|```')
     elif arg == 'clear':
         await ctx.send('```cy\\clear <количество> |confirm|```')
     elif arg == 'dm':
-        await ctx.send('```cy\\dm <@пинг/имя/ID> <текст>```')
+        await ctx.send('```cy\\dm <@пинг> <текст>```')
     elif arg == 'edit':
         await ctx.send('```cy\\edit <ID> <новый текст>```')
     elif arg == 'say':
-        await ctx.send('```cy\\say |noembed| |text| |title текст| |description текст| |footer текст| |ссылка| |ссылка| |цвет| |@пинг/имя/ID| |@роль/имя роли/ID роли|(cy\\say "" "" "title" "description" "footer")```')
+        await ctx.send('```cy\\say |noembed| |text| |title текст| |description текст| |footer текст| |ссылка| |ссылка| |цвет| |@пинг| |@роль|(cy\\say "" "" "title" "description" "footer")```')
     elif arg == 'emb_ctx':
         await ctx.send('```cy\\emb_ctx <ID>```')
     elif arg == 'emb_edit':
-        await ctx.send('```cy\\emb_edit <ID> |title текст| |description текст| |footer текст| |ссылка| |ссылка| |цвет| |@пинг/имя/ID| |@роль/имя роли/ID роли|```')
+        await ctx.send('```cy\\emb_edit <ID> |title текст| |description текст| |footer текст| |ссылка| |ссылка| |цвет| |@пинг| |@роль|```')
     elif arg == 'say_everyone':
-        await ctx.send('```cy\\say_everyone |title текст| |description текст| |footer текст| |ссылка| |ссылка| |цвет| |@пинг/имя/ID| |@роль/имя роли/ID роли|(cy\\say_everyone "" "" "title" "description" "footer")```')
+        await ctx.send('```cy\\say_everyone |title текст| |description текст| |footer текст| |ссылка| |ссылка| |цвет| |@пинг| |@роль|(cy\\say_everyone "" "" "title" "description" "footer")```')
     elif arg == 'give':
-        await ctx.send('```cy\\give <@пинг/имя/ID> <@роль/имя роли/ID роли>```')
+        await ctx.send('```cy\\give <@пинг> <@роль/имя роли/ID роли>```')
     elif arg == 'kick':
-        await ctx.send('```cy\\kick <@пинг/имя/ID> |причина|```')
+        await ctx.send('```cy\\kick <@пинг> |причина|```')
     elif arg == 'mute':
-        await ctx.send('```cy\\mute <@пинг/имя/ID> <время(s,m,h,d(15s, 5m, 1h, 5d))> |причина|```')
+        await ctx.send('```cy\\mute <@пинг> <время(s,m,h,d(15s, 5m, 1h, 5d))> |причина|```')
     elif arg == 'remind':
         await ctx.send('```cy\\remind <время(s,m,h,d(15s, 5m, 1h, 5d))> <текст>```')
     elif arg == 'role':
-        await ctx.send('```cy\\role <@роль/имя роли/ID роли>```')
+        await ctx.send('```cy\\role <@роль>```')
     elif arg == 'take':
-        await ctx.send('```cy\\take <@пинг/имя/ID> <@роль/имя роли/ID роли>```')
+        await ctx.send('```cy\\take <@пинг> <@роль>```')
     elif arg == 'unmute':
-        await ctx.send('```cy\\unmute <@пинг/имя/ID> |причина|```')
+        await ctx.send('```cy\\unmute <@пинг> |причина|```')
     else:
         emb = discord.Embed(description = 'Для этой команды не нужны аргументы', colour = discord.Color.red())
         emb.set_footer(text = 'Хотя, возможно, вы ввели команду неправильно?')
