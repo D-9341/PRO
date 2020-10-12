@@ -435,9 +435,8 @@ async def rp(ctx):
 @commands.cooldown(1, 5, commands.BucketType.default)
 async def rap(ctx):
     await ctx.message.delete()
-    emb = discord.Embed(colour = ctx.author.color)
-    emb.set_author(name = ctx.author, icon_url = ctx.author.icon_url)
-    emb.set_image(url = 'https://thumbs.gfycat.com/MessyCarefreeHousefly-size_restricted.gif')
+    emb = discord.Embed(description = 'https://thumbs.gfycat.com/MessyCarefreeHousefly-size_restricted.gif', colour = ctx.author.color)
+    emb.set_author(name = ctx.author, icon_url = ctx.author.avatar_url)
     await ctx.send(embed = emb)
         
 @client.command()
