@@ -307,7 +307,7 @@ async def guild(ctx, guild: discord.Guild = None):
     if ctx.guild.id in guilds:
         if guild == None:
             guild = ctx.guild
-		
+		statuses = [len(list(filter(lambda m: str(m.status) == "online", ctx.guild.members))), len(list(filter(lambda m: str(m.status) == "idle", ctx.guild.members))), len(list(filter(lambda m: str(m.status) == "dnd", ctx.guild.members))), len(list(filter(lambda m: str(m.status) == "offline", ctx.guild.members)))]
         emb = discord.Embed(title = f'Информация о {guild}', colour = discord.Color.red(), timestamp = ctx.message.created_at)
         emb.add_field(name = 'ID сервера', value = guild.id)
         emb.add_field(name = 'Уровень сервера', value = guild.premium_tier)
