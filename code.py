@@ -102,7 +102,7 @@ async def ban(ctx, member: discord.Member, *, reason = None):
             else:
                 emb = discord.Embed(colour = member.color)
                 emb.set_author(name = ctx.author, icon_url = ctx.author.avatar_url)
-                emb.add_field(name = 'Был кикнут', value = member.mention)
+                emb.add_field(name = 'Был забанен', value = member.mention)
                 emb.add_field(name = 'По причине', value = reason)
                 await ctx.send(embed = emb)
                 await member.ban(reason = reason)
