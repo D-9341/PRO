@@ -239,9 +239,9 @@ async def mute(ctx, member: discord.Member, time: TimeConverter, *, reason: str 
                         else:
                             emb = discord.Embed(description = f'Снятие мута для {member.mention} не требуется. Роли Muted не обнаружено в списке ролей участника.', colour = discord.Color.red())
                             await ctx.send(embed = emb)    
-            else:
-                emb = discord.Embed(description = f'Извините, {ctx.author.mention}, но вы не можете замутить моего создателя!', colour = discord.Color.red())
-                await ctx.send(embed = emb)
+        else:
+            emb = discord.Embed(description = f'Извините, {ctx.author.mention}, но вы не можете замутить моего создателя!', colour = discord.Color.red())
+            await ctx.send(embed = emb)
         
 @client.command(aliases = ['Unmute', 'UNMUTE'])
 @commands.has_permissions(manage_channels = True)
