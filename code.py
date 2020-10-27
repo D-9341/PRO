@@ -313,23 +313,48 @@ async def clear(ctx, amount: int, confirm: str = None):
 #Mod
 
 #Misc
-@client.command(aliases = ['Guild', 'GUILD'])
+@client.command()
 @commands.cooldown(1, 5, commands.BucketType.default)
-async def guild(ctx, guild: discord.Guild = None):
+async def rolemembers(ctx, role: discord.Role, member: discord.Member = None):
     await ctx.message.delete()
     if ctx.guild.id in guilds:
-        if guild == None:
-            guild = ctx.guild
-        emb = discord.Embed(title = f'Информация о {guild}', colour = discord.Color.red(), timestamp = ctx.message.created_at)
+        emb = discord.Embed(colour = discord.Color.orange())
+        emb.add_field(name = f'Участники с ролью {role}', value = ', '.join([member.mention for member in role.members]))
+        await ctx.send(embed = emb)
+    else:
+        emb = discord.Embed(description = f'Сервер `{ctx.guild}` не имеет активных подписок. Купить можно по [Ссылке](https://www.patreon.com/cephaloncy) Преимущества: пинг не более 25ms, больший аптайм, защита от несанкционированного добавления на сервера.', colour = discord.Color.red())
+        await ctx.send(embed = emb)
+        
+@client.command(aliases = ['Guild', 'GUILD'])
+@commands.cooldown(1, 5, commands.BucketType.default)
+async def guild(ctx):
+    await ctx.message.delete()
+    if ctx.guild.id in guilds:
+        guild = ctx.guild
+        emb = discord.Embed(colour = discord.Color.red(), timestamp = ctx.message.created_at)
+        emb.set_author(name = guild, icon_url = guild.icon_url)
         emb.add_field(name = 'ID сервера', value = guild.id)
-        emb.add_field(name = 'Уровень сервера', value = guild.premium_tier)
-        emb.add_field(name = 'Люди, бустящие сервер', value = guild.premium_subscribers)
+        emb.add_field(name = 'Голосовой регион', value = guild.region)
         emb.add_field(name = 'Участников', value = guild.member_count)
-        if len(guild.roles) >= 15:
-            emb.add_field(name = 'Роли', value = f'Слишком много ({len(guild.roles)-1})', inline = False)
+        emb.add_field(name = 'Каналов', value = f'Текстовых {len(guild.text_channels)} | Голосовых {len(guild.voice_channels)}')
+        limit = len(guild.roles)
+        if limit > 21:
+            emb.add_field(name = 'Роли', value = f'Слишком много для отрисовки ({len(guild.roles)-1}) [лимит 20]', inline = False)
+        elif limit == 21:
+            emb.add_field(name = f'Роли ({len(guild.roles)-1}) [лимит достигнут]', value = ', '.join([role.mention for role in guild.roles[1:]]), inline = False)
+        elif limit == 20:
+            emb.add_field(name = f'Роли ({len(guild.roles)-1}) [1 до лимита]', value = ', '.join([role.mention for role in guild.roles[1:]]), inline = False)
+        elif limit == 19:
+            emb.add_field(name = f'Роли ({len(guild.roles)-1}) [2 до лимита]', value = ', '.join([role.mention for role in guild.roles[1:]]), inline = False)
+        elif limit == 18:
+            emb.add_field(name = f'Роли ({len(guild.roles)-1}) [3 до лимита]', value = ', '.join([role.mention for role in guild.roles[1:]]), inline = False)
         else:
-            emb.add_field(name = f'Роли [{len(guild.roles)-1}]', value = ' '.join([role.mention for role in guild.roles[1:]]), inline = False)
-        emb.add_field(name = 'Дата создания сервера', value = guild.created_at.strftime('%d/%m/%Y %H:%M:%S UTC'), inline = False)
+            emb.add_field(name = f'Роли ({len(guild.roles)-1})', value = ', '.join([role.mention for role in guild.roles[1:]]), inline = False)
+        now = datetime.datetime.today()
+        then = guild.created_at
+        delta = now - then
+        d = guild.created_at.strftime('%d/%m/%Y %H:%M:%S UTC')
+        emb.add_field(name = 'Дата создания сервера', value = f'{delta.days} дней назад. ({d})', inline = False)
         emb.set_thumbnail(url = guild.icon_url)
         await ctx.send(embed = emb)
     else:
@@ -362,7 +387,11 @@ async def role(ctx, *, role: discord.Role):
         emb.add_field(name = 'Упоминается?', value = role.mentionable)
         emb.add_field(name = 'Управляется интеграцией?', value = role.managed)
         emb.add_field(name = 'Позиция в списке', value = role.position)
-        emb.add_field(name = 'Создана', value = role.created_at.strftime('%d/%m/%Y %H:%M:%S UTC'), inline = False)
+        now = datetime.datetime.today()
+        then = role.created_at
+        delta = now - then
+        d = role.created_at.strftime('%d/%m/%Y %H:%M:%S UTC')
+        emb.add_field(name = 'Создана', value = f'{delta.days} дня(ей) назад. ({d})', inline = False)
         emb.add_field(name = 'Показывает участников отдельно?', value = role.hoist)
         await ctx.send(embed = emb)
     
