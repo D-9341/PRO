@@ -8,7 +8,7 @@ import discord
 from discord.ext import commands
 from discord.utils import get
 
-client = commands.Bot(command_prefix = commands.when_mentioned_or('cy\\'), owner_id = 338714886001524737)
+client = commands.Bot(command_prefix = commands.when_mentioned_or('cy\\') intents = discord.Intents.all(), owner_id = 338714886001524737)
 client.remove_command('help')
 
 time_regex = re.compile("(?:(\d{1,5})(h|s|m|d))+?")
@@ -48,7 +48,7 @@ async def on_guild_join(guild):
 @client.command()
 @commands.has_permissions(view_audit_log = True)
 @commands.cooldown(1, 5, commands.BucketType.default)
-async def dm(ctx, member: discord.User, *, text):
+async def dm(ctx, member: discord.Member, *, text):
     await ctx.message.delete()
     if ctx.guild.id not in guilds:
         emb = discord.Embed(description = f'Сервер `{ctx.guild}` не имеет активных подписок. Купить можно по [Ссылке](https://www.patreon.com/cephaloncy) Преимущества: пинг не более 25ms, больший аптайм, защита от несанкционированного добавления на сервера.', colour = discord.Color.red())
@@ -726,39 +726,39 @@ async def help(ctx, arg = None):
         emb.set_footer(text = 'Cephalon Cy by сасиска#2472')
         await ctx.send(embed = emb)
     elif arg == 'about':
-        await ctx.send('```cy\\about |@пинг|```')
+        await ctx.send('```cy\\about ||@пинг/имя/ID|```')
     elif arg == 'avatar':
-        await ctx.send('```cy\\avatar |@пинг|```')
+        await ctx.send('```cy\\avatar |@пинг/имя/ID|```')
     elif arg == 'ban':
-        await ctx.send('```cy\\ban <@пинг> |причина|```')
+        await ctx.send('```cy\\ban <@пинг/имя/ID> |причина|```')
     elif arg == 'clear':
         await ctx.send('```cy\\clear <количество> |confirm|```')
     elif arg == 'dm':
-        await ctx.send('```cy\\dm <@пинг> <текст>```')
+        await ctx.send('```cy\\dm <@пинг/имя/ID> <текст>```')
     elif arg == 'edit':
         await ctx.send('```cy\\edit <ID> <новый текст>```')
     elif arg == 'say':
-        await ctx.send('```cy\\say |noembed| |text| |title текст| |description текст| |footer текст| |ссылка| |ссылка| |цвет| |@пинг| |@роль|(cy\\say "" "" "title" "description" "footer")```')
+        await ctx.send('```cy\\say |noembed| |text| |title текст| |description текст| |footer текст| |ссылка| |ссылка| |цвет| |@пинг/имя/ID| |@роль/имя роли/ID роли|(cy\\say "" "" "title" "description" "footer")```')
     elif arg == 'emb_ctx':
         await ctx.send('```cy\\emb_ctx <ID>```')
     elif arg == 'emb_edit':
-        await ctx.send('```cy\\emb_edit <ID> |title текст| |description текст| |footer текст| |ссылка| |ссылка| |цвет| |@пинг| |@роль|```')
+        await ctx.send('```cy\\emb_edit <ID> |title текст| |description текст| |footer текст| |ссылка| |ссылка| |цвет| |@пинг/имя/ID| |@роль/имя роли/ID роли|```')
     elif arg == 'say_everyone':
-        await ctx.send('```cy\\say_everyone |title текст| |description текст| |footer текст| |ссылка| |ссылка| |цвет| |@пинг| |@роль|(cy\\say_everyone "" "" "title" "description" "footer")```')
+        await ctx.send('```cy\\say_everyone |title текст| |description текст| |footer текст| |ссылка| |ссылка| |цвет| |@пинг/имя/ID| |@роль/имя роли/ID роли|(cy\\say_everyone "" "" "title" "description" "footer")```')
     elif arg == 'give':
-        await ctx.send('```cy\\give <@пинг> <@роль/имя роли/ID роли>```')
+        await ctx.send('```cy\\give <@пинг/имя/ID> <@роль/имя роли/ID роли>```')
     elif arg == 'kick':
-        await ctx.send('```cy\\kick <@пинг> |причина|```')
+        await ctx.send('```cy\\kick <@пинг/имя/ID> |причина|```')
     elif arg == 'mute':
-        await ctx.send('```cy\\mute <@пинг> <время(s,m,h,d(15s, 5m, 1h, 5d))> |причина|```')
+        await ctx.send('```cy\\mute <@пинг/имя/ID> <время(s,m,h,d(15s, 5m, 1h, 5d))> |причина|```')
     elif arg == 'remind':
         await ctx.send('```cy\\remind <время(s,m,h,d(15s, 5m, 1h, 5d))> <текст>```')
     elif arg == 'role':
-        await ctx.send('```cy\\role <@роль>```')
+        await ctx.send('```cy\\role <@роль/имя роли/ID роли>```')
     elif arg == 'take':
-        await ctx.send('```cy\\take <@пинг> <@роль>```')
+        await ctx.send('```cy\\take <@пинг/имя/ID> <@роль/имя роли/ID роли>```')
     elif arg == 'unmute':
-        await ctx.send('```cy\\unmute <@пинг> |причина|```')
+        await ctx.send('```cy\\unmute <@пинг/имя/ID> |причина|```')
     else:
         emb = discord.Embed(description = 'Для этой команды не нужны аргументы', colour = discord.Color.red())
         emb.set_footer(text = 'Хотя, возможно, вы ввели команду неправильно?')
@@ -775,12 +775,16 @@ async def on_command_error(ctx, error):
         emb = discord.Embed(description = f'{ctx.author.mention}, я не знаю такую команду!', colour = discord.Color.red())
         emb.set_footer(text = 'Считаете, что такая команда должна быть? Напишите сасиска#2472 и опишите её суть!')
         await ctx.send(embed = emb)
-
-@client.event
-async def on_command_error(ctx, error):
-    if isinstance(error, commands.CommandOnCooldown):
+    elif isinstance(error, commands.MissingPermissions):
         await ctx.message.delete()
-        emb = discord.Embed(description = f'{ctx.author.mention}, команда в кд, потерпи чутка!', colour = discord.Color.red())
+        emb = discord.Embed(description = f'{ctx.author.mention}, у вас недостаточно прав на выполнение команды `{ctx.command.name}`', colour = discord.Color.red())
+        await ctx.send(embed = emb)
+    elif isinstance(error, commands.CommandOnCooldown):
+        await ctx.message.delete()
+        s = error.retry_after
+        choises = ['Its not time yet', 'I am not ready', 'Not yet']
+        rand = random.choice(choises)
+        emb = discord.Embed(description = f'{rand}! Команда `{ctx.command.name}` будет доступна через {round(s)} секунд!', colour = discord.Color.red())
         await ctx.send(embed = emb)
 #корень
          
