@@ -374,11 +374,20 @@ async def avatar(ctx, user: discord.Member = None):
         emb = discord.Embed(description = f'Сервер `{ctx.guild}` не имеет активных подписок. Купить можно по [Ссылке](https://www.patreon.com/cephaloncy)) Преимущества: пинг не более 25ms, больший аптайм, защита от несанкционированного добавления на сервера.', colour = discord.Color.red())
         await ctx.send(embed = emb)
     else:
-        if user == None:
-            user = ctx.author
-        emb = discord.Embed(description = f'[Прямая ссылка]({user.avatar_url})', colour = user.color)
-        emb.set_author(name = user)
-        emb.set_image(url = user.avatar_url)
+        if member == None:
+            member = ctx.author
+        av = 'png'
+        av1 = 'webp'
+        av2 = 'jpg'
+        emb = discord.Embed(colour = member.color)
+        if member.is_avatar_animated() == False:
+            emb.add_field(name = '.png', value = f'[Ссылка]({member.avatar_url_as(format = av)})')
+            emb.add_field(name = '.webp', value = f'[Ссылка]({member.avatar_url_as(format = av1)})')
+            emb.add_field(name = '.jpg', value = f'[Ссылка]({member.avatar_url_as(format = av2)})')
+        else:
+            emb.add_field(name = 'Внимание', value = 'по причине того, что аватар анимирован - ссылок на статичные форматы нет!')
+        emb.set_image(url = member.avatar_url)
+        emb.set_author(name = member)
         await ctx.send(embed = emb)
     
 @client.command(aliases = ['me', 'Me', 'ME', 'About', 'ABOUT'])
@@ -397,15 +406,37 @@ async def about(ctx, member: discord.Member = None):
             bot = 'Неа'
         elif member.bot == True:
             bot = 'Ага'
-        emb = discord.Embed(title = f'Информация о {member}', colour = member.color, timestamp = ctx.message.created_at)
+        emb = discord.Embed(colour = member.color, timestamp = ctx.message.created_at)
+        emb.set_author(name = member)
         emb.add_field(name = 'ID', value = member.id)
-        emb.add_field(name = 'Создан', value = member.created_at.strftime('%d/%m/%Y %H:%M:%S UTC'), inline = False)
-        emb.add_field(name = 'Вошёл', value = member.joined_at.strftime('%d/%m/%Y %H:%M:%S UTC'), inline = False)
+        now = datetime.datetime.today()
+        then = member.created_at
+        delta = now - then
+        d = member.created_at.strftime('%d/%m/%Y %H:%M:%S UTC')
+        then1 = member.joined_at
+        delta1 = now - then1
+        d1 = member.joined_at.strftime('%d/%m/%Y %H:%M:%S UTC')
+        emb.add_field(name = 'Создан', value = f'{delta.days} дня(ей) назад. ({d})', inline = False)
+        emb.add_field(name = 'Вошёл', value = f'{delta1.days} дня(ей) назад. ({d1})', inline = False)
         emb.add_field(name = 'Упоминание', value = member.mention)
-        emb.add_field(name = 'Имя', value = member.name)
+        emb.add_field(name = 'Raw имя', value = member.name)
         emb.add_field(name = 'Никнейм', value = member.nick)
         emb.add_field(name = 'Статус', value = member.status)
-        emb.add_field(name = f'Роли [{len(member.roles)-1}]', value=' '.join([role.mention for role in member.roles[1:]]), inline = False)
+        if member.activities != None and member.status != 'offline':
+            emb.add_field(name = 'Активности', value = ', '.join([activity.name for activity in member.activities]))
+        limit = len(member.roles)
+        if limit > 21:
+            emb.add_field(name = 'Роли', value = f'Слишком много для отрисовки ({len(member.roles)-1}) [лимит 20]', inline = False)
+        elif limit == 21:
+            emb.add_field(name = f'Роли ({len(member.roles)-1}) [лимит достигнут]', value = ', '.join([role.mention for role in member.roles[1:]]), inline = False)
+        elif limit == 20:
+            emb.add_field(name = f'Роли ({len(member.roles)-1}) [1 до лимита]', value = ', '.join([role.mention for role in member.roles[1:]]), inline = False)
+        elif limit == 19:
+            emb.add_field(name = f'Роли ({len(member.roles)-1}) [2 до лимита]', value = ', '.join([role.mention for role in member.roles[1:]]), inline = False)
+        elif limit == 18:
+            emb.add_field(name = f'Роли ({len(member.roles)-1}) [3 до лимита]', value = ', '.join([role.mention for role in member.roles[1:]]), inline = False)
+        else:
+            emb.add_field(name = f'Роли ({len(member.roles)-1})', value = ', '.join([role.mention for role in member.roles[1:]]), inline = False)
         emb.add_field(name = 'Высшая Роль', value = member.top_role.mention, inline = False)
         emb.add_field(name = 'Бот?', value = bot)
         emb.set_thumbnail(url = member.avatar_url)
@@ -431,6 +462,13 @@ async def remind(ctx, time: TimeConverter, *, arg):
 #Misc
 
 #Fun
+@client.command()
+@commands.cooldown(1, 3, commands.BucketType.default)
+async def niggers(ctx):
+    await ctx.message.delete()
+    emb = discord.Embed(description = '[осуждающее видео](https://vk.com/video-184856829_456240358)', colour = discord.Color.orange())
+    await ctx.send(embed = emb)
+
 @client.command()
 @commands.cooldown(1, 3, commands.BucketType.default)
 async def aye_balbec(ctx):
